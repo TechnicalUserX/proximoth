@@ -1,4 +1,4 @@
-![](/images/proximoth_banner.png)
+![](/images/proximoth_banner_2.png)
 # Proximoth
 Control Frame Attack Vulnerability Detection Tool
 
