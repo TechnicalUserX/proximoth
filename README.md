@@ -3,7 +3,7 @@ Control Frame Attack Vulnerability Detection Tool
 
 
 # Usage
-```bash
+```
 proximoth [flags] <TARGET>
 
  <TARGET>                            : MAC address of the target, no need a flag.
