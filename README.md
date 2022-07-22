@@ -1,6 +1,7 @@
 ![](/images/proximoth_banner.png)
 # Proximoth
-Control Frame Attack Vulnerability Detection Tool
+### Control Frame Attack Vulnerability Detection Tool
+-----------------------------------------------------
 
 ![](/images/i1.png) 
 ![](/images/i2.png) 
