@@ -6,6 +6,11 @@
 ![](/images/i1.png) 
 ![](/images/i2.png) 
 
+## Installation By Debian Package
+```bash
+$ sudo dpkg -i proximoth-x.x.x-amd64.deb
+```
+
 ## Installation By Building
 
 ```bash
@@ -13,6 +18,7 @@ $ git clone https://github.com/TechnicalUserX/proximoth.git
 $ cd proximoth
 $ make
 ```
+
 ## Put The Interface In Monitor Mode (Required By Proximoth)
 > `wlan0` name may vary depending on your operating system.
 > Sometimes, it may look like wlp2s0 or wlx6a4cdd56f9b1.
