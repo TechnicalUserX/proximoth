@@ -20,7 +20,7 @@ $ sudo ip link set wlan0 up
 
 ```
 ## To put the interface into a specific channel
-> <CHAN> is arbitrary, like 2 or 11.
+> CHAN is arbitrary, like 2 or 11.
 ```bash
 $ sudo iw wlan0 set channel <CHAN>
 ```
