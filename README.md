@@ -12,7 +12,7 @@ $ git clone https://github.com/TechnicalUserX/proximoth.git
 $ cd proximoth
 $ make
 ```
-## Put the interface in monitor mode
+## Put The Interface In Monitor Mode
 > `wlan0` name may vary depending on your operating system.
 > Sometimes, it may look like wlp2s0 or wlx6a4cdd56f9b1.
 ```bash
@@ -21,7 +21,7 @@ $ sudo iw wlan0 set type monitor
 $ sudo ip link set wlan0 up
 
 ```
-## To put the interface into a specific channel
+## To Put The Interface Into A Specific Channel
 > CHAN is arbitrary, like 2 or 11. Available channels depend on your Wi-Fi antenna.
 
 ```bash
