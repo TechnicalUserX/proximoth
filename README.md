@@ -2,9 +2,6 @@
 # Proximoth
 Control Frame Attack Vulnerability Detection Tool
 
-<img style="float: right;" src="/images/i1.png"/>
-<img style="float: right;" src="/images/i2.png"/>
-
 ![](/images/i1.png) 
 ![](/images/i2.png) 
 
