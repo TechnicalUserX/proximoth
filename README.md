@@ -2,12 +2,19 @@
 # Proximoth
 Control Frame Attack Vulnerability Detection Tool
 
-# Installation By Building
+## Installation By Building
 
 ```bash
-$ git clone 
+$ git clone https://github.com/TechnicalUserX/proximoth.git
+$ cd proximoth
+$ make
+```
+## Installation By Debian Package
+```bash
+
 
 ```
+
 
 # Usage
 ```
