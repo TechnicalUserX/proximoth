@@ -1,7 +1,7 @@
 #ifndef _PROXIMOTH_HPP
 #define _PROXIMOTH_HPP
 
-#define PROXIMOTH_VERSION "1.0.0"
+#define PROXIMOTH_VERSION "0.0.1-beta"
 
 #include <cstdio>
 #include <cstdlib>
