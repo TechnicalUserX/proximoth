@@ -12,10 +12,17 @@ $ git clone https://github.com/TechnicalUserX/proximoth.git
 $ cd proximoth
 $ make
 ```
-## Installation By Debian Package
+## Put the interface in monitor mode
 ```bash
+$ sudo ip link set wlan0 down
+$ sudo iw wlan0 set type monitor
+$ sudo ip link set wlan0 up
 
-
+```
+## To put the interface into a specific channel
+> <CHAN> is arbitrary, like 2 or 11.
+```bash
+$ sudo iw wlan0 set channel <CHAN>
 ```
 
 
