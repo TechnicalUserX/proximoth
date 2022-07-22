@@ -12,7 +12,7 @@ $ git clone https://github.com/TechnicalUserX/proximoth.git
 $ cd proximoth
 $ make
 ```
-## Put The Interface In Monitor Mode
+## Put The Interface In Monitor Mode (Required By Proximoth)
 > `wlan0` name may vary depending on your operating system.
 > Sometimes, it may look like wlp2s0 or wlx6a4cdd56f9b1.
 ```bash
