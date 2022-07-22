@@ -34,13 +34,13 @@ $ sudo iw wlan0 set channel <CHAN>
 # Usage
 ## Example Usages
 ```bash
-$ sudo ./proximoth -i wlan0 10:DA:41:E8:FA:DC
+$ sudo proximoth -i wlan0 10:DA:41:E8:FA:DC
 
-$ sudo ./proximoth -i wlan0 10:DA:41:E8:FA:DC --dump-file dump --file record
+$ sudo proximoth -i wlan0 10:DA:41:E8:FA:DC --dump-file dump --file record
 
-$ sudo ./proximoth -i wlan0 10:DA:41:E8:FA:DC --wait-rts
+$ sudo proximoth -i wlan0 10:DA:41:E8:FA:DC --wait-rts
 
-$ sudo ./proximoth -i wlan0 10:DA:41:E8:FA:DC -b 1C:CC:D6:00:00:00
+$ sudo proximoth -i wlan0 10:DA:41:E8:FA:DC -b 1C:CC:D6:00:00:00
 ```
 ## General Usage Information
 ```
