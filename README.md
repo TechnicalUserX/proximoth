@@ -31,6 +31,7 @@ $ make
 > `wlan0` name may vary depending on your operating system.
 > Sometimes, it may look like wlp2s0 or wlx6a4cdd56f9b1.
 ```bash
+#Put the interface into monitor mode
 $ sudo ip link set wlan0 down
 $ sudo iw wlan0 set type monitor
 $ sudo ip link set wlan0 up
