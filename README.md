@@ -35,7 +35,13 @@ $ sudo ip link set wlan0 down
 $ sudo iw wlan0 set type monitor
 $ sudo ip link set wlan0 up
 
+#To put the interface back to managed mode
+$ sudo ip link set wlan0 down
+$ sudo iw wlan0 set type managed
+$ sudo ip link set wlan0 up
 ```
+
+
 ## To Put The Interface Into A Specific Channel
 > CHAN is arbitrary, like 2 or 11. Available channels depend on your Wi-Fi antenna.
 
