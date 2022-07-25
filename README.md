@@ -11,8 +11,16 @@
 $ sudo dpkg -i proximoth-x.x.x-amd64.deb
 ```
 
-## Installation By Building
 
+## Installation By Building
+### Required Libraries
+* libpcap-dev
+* libc6 
+``` bash
+$ sudo apt-get install libc6 libpcap-dev
+```
+
+### Installation
 ```bash
 $ git clone https://github.com/TechnicalUserX/proximoth.git
 $ cd proximoth
