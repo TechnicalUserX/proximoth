@@ -3,6 +3,8 @@
 
 #include "proximoth.hpp"
 
+typedef unsigned char byte_t;
+
 struct ieee80211_radiotap_header {
 
 	uint8_t version;
@@ -20,7 +22,7 @@ struct ieee80211_radiotap_align_size {
 
 extern byte_t ieee80211_radiotap_template[8];
 
-extern struct ieee80211_radiotap_align_size rtap_namespace_sizes[23];
+extern struct ieee80211_radiotap_align_size ieee80211_radiotap_namespaces[23];
 
 enum ieee80211_radiotap_presence {
 	IEEE80211_RADIOTAP_TSFT = 0,
@@ -50,6 +52,10 @@ enum ieee80211_radiotap_presence {
 	IEEE80211_RADIOTAP_EXT = 31,
 	IEEE80211_RADIOTAP_DUMMY = 32
 };
+
+int ieee80211_radiotap_find_next_boundary(int current_byte_jump);
+
+int ieee80211_radiotap_cacluate_byte_jump(int frame_remaining_bytes, int field_alignment, int field_size);
 
 void ieee80211_radiotap_initialize_align_size(struct ieee80211_radiotap_align_size radiotap_align_size[23]);
 
