@@ -96,7 +96,7 @@ int proximoth_config(int argc, char* argv[]){
     proximoth_config_start_time.tv_sec += proximoth_config_time_gmt_offset;
 
 
-    ieee80211_radiotap_initialize_align_size(rtap_namespace_sizes);
+    ieee80211_radiotap_initialize_align_size(ieee80211_radiotap_namespaces);
 
     struct sigaction proximoth_signal_action_window_resize;
     proximoth_signal_action_window_resize.sa_handler = proximoth_signal_display_manager_resize_event;
