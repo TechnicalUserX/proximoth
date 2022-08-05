@@ -9,12 +9,12 @@ Control Frame Attack lets the attacker find out whether the target device is in 
 * https://www.researchgate.net/publication/314361145_A_Study_of_MAC_Address_Randomization_in_Mobile_Devices_and_When_it_Fails
 * https://technicaluserx.wordpress.com/2022/07/22/proximoth/
 
+-------------------------------------------
 
 
 ![](/images/i1.png) 
 ![](/images/i2.png) 
 
--------------------------------------------
 
 ## Installation By Debian Package
 ```bash
