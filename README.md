@@ -5,7 +5,7 @@ Proximoth performs `Control Frame Attack` to detect the vulnerability of Wi-Fi d
 
 Control Frame Attack lets the attacker find out whether the target device is in proximity with the limitation of Wi-Fi antennas' scan range.
 
-# More info about `Control Frame Attack`:
+# More info about Control Frame Attack:
 * https://www.researchgate.net/publication/314361145_A_Study_of_MAC_Address_Randomization_in_Mobile_Devices_and_When_it_Fails
 * https://technicaluserx.wordpress.com/2022/07/22/proximoth/
 
