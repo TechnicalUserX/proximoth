@@ -2,6 +2,11 @@
 # Proximoth
 ### Control Frame Attack Vulnerability Detection Tool
 -----------------------------------------------------
+Proximoth performs `Control Frame Attack` to detect vulnerability of Wi-Fi devices.
+
+#More info about `Control Frame Attack:
+* https://www.researchgate.net/publication/314361145_A_Study_of_MAC_Address_Randomization_in_Mobile_Devices_and_When_it_Fails
+* https://technicaluserx.wordpress.com/2022/07/22/proximoth/
 
 ![](/images/i1.png) 
 ![](/images/i2.png) 
