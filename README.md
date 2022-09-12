@@ -16,11 +16,6 @@ Control Frame Attack lets the attacker find out whether the target device is in 
 ![](/images/i2.png) 
 
 
-## Installation By Debian Package
-```bash
-$ sudo dpkg -i proximoth-x.x.x-amd64.deb
-```
-
 
 ## Installation By Building
 ### Required Libraries
