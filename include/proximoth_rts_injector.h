@@ -1,7 +1,7 @@
-#ifndef _PROXIMOTH_RTS_INJECTOR_HPP
-#define _PROXIMOTH_RTS_INJECTOR_HPP
+#ifndef PROXIMOTH_RTS_INJECTOR_H
+#define PROXIMOTH_RTS_INJECTOR_H
 
-#include "proximoth.hpp"
+#include "proximoth.h"
 
 #define IEEE80211_FRAME_CONTROL_RTS 0b10110100
 

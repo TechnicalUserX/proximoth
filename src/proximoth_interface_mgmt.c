@@ -1,4 +1,4 @@
-#include "../include/proximoth_interface_mgmt.hpp"
+#include "../include/proximoth_interface_mgmt.h"
 
 int proximoth_interface_channel;
 
@@ -21,7 +21,7 @@ int proximoth_interface_get_mode(const char* iface_name,proximoth_interface_mode
     return ret;
 }
 
-double proximoth_convert_freq_to_float(struct iw_freq* freq){
+double proximoth_interface_convert_freq_to_float(struct iw_freq* freq){
 	return ((double) freq->m) * pow(10, freq->e);
 
 }
@@ -51,14 +51,11 @@ int proximoth_interface_get_channel(char* iface_name, int* channel){
 
     int sock = socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
 
-
     struct iwreq wrq;
 
 	char buf[sizeof(struct iw_range) * 2] = {0};
 
     double frequency = 0.0;
-
-
 
     int ret;
 
@@ -77,12 +74,10 @@ int proximoth_interface_get_channel(char* iface_name, int* channel){
         struct iw_range* range = (struct iw_range *) buf;
         for(int i = 0; i < range->num_frequency; i++){
 
-
-            if(frequency == proximoth_convert_freq_to_float(&(range->freq[i])  )){
+            if(frequency == proximoth_interface_convert_freq_to_float(&(range->freq[i])  )){
                 *channel = range->freq[i].i;
                 return 0;
             }
-
 
         }
 
@@ -90,7 +85,5 @@ int proximoth_interface_get_channel(char* iface_name, int* channel){
     }else{
         return 1;
     }
-
     
 }
-

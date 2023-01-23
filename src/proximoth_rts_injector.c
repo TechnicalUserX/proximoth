@@ -1,9 +1,9 @@
-#include "../include/proximoth_rts_injector.hpp"
-#include "../include/proximoth_radiotap.hpp"
-#include "../include/proximoth_config.hpp"
-#include "../include/proximoth_misc_tools.hpp"
-#include "../include/proximoth_error.hpp"
-#include "../include/proximoth_frame_sniffer.hpp"
+#include "../include/proximoth_rts_injector.h"
+#include "../include/proximoth_radiotap.h"
+#include "../include/proximoth_config.h"
+#include "../include/proximoth_toolset.h"
+#include "../include/proximoth_error.h"
+#include "../include/proximoth_frame_sniffer.h"
 
 pthread_t proximoth_rts_injector_thread;
 
@@ -18,9 +18,9 @@ void* proximoth_rts_injector(void* arg){
 
     pcap_t* handle = (pcap_t*)proximoth_config_interface_handle;
     
-    byte_t frame[sizeof(ieee80211_radiotap_template) + sizeof(ieee80211_request_to_send)];
+    byte_t frame[sizeof(ieee80211_radiotap_template) + sizeof(struct ieee80211_request_to_send)];
 
-    ieee80211_request_to_send rts;
+    struct ieee80211_request_to_send rts;
     rts.version = 0b00; 
     rts.type = 0b01; 
     rts.subtype = 0b1011;

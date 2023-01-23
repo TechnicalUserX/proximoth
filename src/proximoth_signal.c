@@ -1,18 +1,15 @@
-#include "../include/proximoth_signal.hpp"
-#include "../include/proximoth_display_manager.hpp"
-#include "../include/proximoth_config.hpp"
-#include "../include/proximoth_error.hpp"
-#include "../include/proximoth_rts_injector.hpp"
-#include "../include/proximoth_frame_sniffer.hpp"
+#include "../include/proximoth_signal.h"
+#include "../include/proximoth_display_manager.h"
+#include "../include/proximoth_config.h"
+#include "../include/proximoth_error.h"
+#include "../include/proximoth_rts_injector.h"
+#include "../include/proximoth_frame_sniffer.h"
 
 void proximoth_signal_display_manager_resize_event(int sig){
 
     if(proximoth_config_finished){
-        system("clear");
         proximoth_display_manager_panel_print();
-
     }
-
 
 }
 

@@ -1,7 +1,7 @@
-#include "../include/proximoth_frame_sniffer.hpp"
-#include "../include/proximoth_radiotap.hpp"
-#include "../include/proximoth_config.hpp"
-#include "../include/proximoth_misc_tools.hpp"
+#include "../include/proximoth_frame_sniffer.h"
+#include "../include/proximoth_radiotap.h"
+#include "../include/proximoth_config.h"
+#include "../include/proximoth_toolset.h"
 
 
 

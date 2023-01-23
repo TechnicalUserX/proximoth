@@ -1,8 +1,8 @@
-#include "../include/proximoth.hpp"
-#include "../include/proximoth_config.hpp"
-#include "../include/proximoth_error.hpp"
-#include "../include/proximoth_threads.hpp"
-#include "../include/proximoth_frame_sniffer.hpp"
+#include "../include/proximoth.h"
+#include "../include/proximoth_config.h"
+#include "../include/proximoth_error.h"
+#include "../include/proximoth_threads.h"
+#include "../include/proximoth_frame_sniffer.h"
 
 int main(int argc, char* argv[]){
 
@@ -10,17 +10,20 @@ int main(int argc, char* argv[]){
     int ret_code = 0;
     
     if( (ret_code = proximoth_config(argc,argv))    != PROXIMOTH_SUCCESS){
-        std::cout << proximoth_error_get_message(ret_code) << std::endl;
+        const char* msg =  proximoth_error_get_message(ret_code);
+        printf("%s\n",msg);
         exit(ret_code);
     }
 
     if( (ret_code = proximoth_threads_start())      != PROXIMOTH_SUCCESS){
-        std::cout << proximoth_error_get_message(ret_code) << std::endl;
+        const char* msg = proximoth_error_get_message(ret_code);
+        printf("%s\n",msg);
         exit(ret_code);        
     }
 
     if( (ret_code = proximoth_threads_wait())       != PROXIMOTH_SUCCESS){
-        std::cout << proximoth_error_get_message(ret_code) << std::endl;
+        const char* msg = proximoth_error_get_message(ret_code);
+        printf("%s\n",msg);
         exit(ret_code);        
     }
 

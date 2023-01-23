@@ -1,7 +1,7 @@
-#ifndef _PROXIMOTH_RADIOTAP_HPP
-#define _PROXIMOTH_RADIOTAP_HPP
+#ifndef PROXIMOTH_RADIOTAP_H
+#define PROXIMOTH_RADIOTAP_H
 
-#include "proximoth.hpp"
+#include "proximoth.h"
 
 typedef unsigned char byte_t;
 
@@ -55,7 +55,7 @@ enum ieee80211_radiotap_presence {
 
 int ieee80211_radiotap_find_next_boundary(int current_byte_jump);
 
-int ieee80211_radiotap_cacluate_byte_jump(int frame_remaining_bytes, int field_alignment, int field_size);
+int ieee80211_radiotap_calculate_byte_jump(int frame_remaining_bytes, int field_alignment, int field_size);
 
 void ieee80211_radiotap_initialize_align_size(struct ieee80211_radiotap_align_size radiotap_align_size[23]);
 

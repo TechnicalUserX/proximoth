@@ -1,7 +1,7 @@
-#ifndef _PROXIMOTH_CONFIG_HPP
-#define _PROXIMOTH_CONFIG_HPP
+#ifndef PROXIMOTH_CONFIG_H
+#define PROXIMOTH_CONFIG_H
 
-#include "proximoth.hpp"
+#include "proximoth.h"
 
 #define PROXIMOTH_CONFIG_DUMP_FILE_MAXLEN 127
 
@@ -22,12 +22,12 @@ extern pcap_t* proximoth_config_interface_handle;
 extern char proximoth_config_error_buffer[256];
 
 struct proximoth_config_flags_t{
-    bool i = 0;
-    bool f = 0;
-    bool b = 0;
-    bool w = 0;
-    bool r = 0;
-    bool d = 0;
+    bool i;
+    bool f;
+    bool b;
+    bool w;
+    bool r;
+    bool d;
 };
 
 extern struct proximoth_config_flags_t proximoth_config_flags;

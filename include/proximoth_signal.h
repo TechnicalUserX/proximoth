@@ -1,7 +1,7 @@
-#ifndef _PROXIMOTH_SIGNAL_HPP
-#define _PROXIMOTH_SIGNAL_HPP
+#ifndef PROXIMOTH_SIGNAL_H
+#define PROXIMOTH_SIGNAL_H
 
-#include "proximoth.hpp"
+#include "proximoth.h"
 
 void proximoth_signal_display_manager_resize_event(int sig);
 

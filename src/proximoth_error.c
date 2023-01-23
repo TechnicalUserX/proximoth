@@ -1,6 +1,6 @@
-#include "../include/proximoth_error.hpp"
+#include "../include/proximoth_error.h"
 
-std::string proximoth_error_get_message(int error_code){
+const char* proximoth_error_get_message(int error_code){
 
     switch(error_code){
 
@@ -40,6 +40,8 @@ std::string proximoth_error_get_message(int error_code){
             return "sigaction() error";
         case PROXIMOTH_ERROR_IOCTL:
             return "ioctl() error";
+        case PROXIMOTH_ERROR_SEMAPHORE_CANNOT_INIT:
+            return "Cannot initialize semaphore";
         default:
             return "?";
 

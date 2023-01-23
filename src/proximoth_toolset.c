@@ -1,5 +1,5 @@
-#include "../include/proximoth_misc_tools.hpp"
-#include "../include/proximoth_error.hpp"
+#include "../include/proximoth_toolset.h"
+#include "../include/proximoth_error.h"
 
 
 uint64_t proximoth_toolset_powm(uint64_t base, uint64_t pow, uint64_t modulo){
@@ -12,7 +12,7 @@ uint64_t proximoth_toolset_powm(uint64_t base, uint64_t pow, uint64_t modulo){
     return m;
 }
 
-bool proximoth_toolset_validate_mac_address(const char* mac_string){
+bool proximoth_toolset_validate_mac_string(const char* mac_string){
     if((int)strlen(mac_string) != 17){
         return false;
     }
@@ -58,7 +58,7 @@ void proximoth_toolset_generate_random_mac(byte_t mac[6]){
     return;
 }
 
-bool proximoth_toolset_confirm_generated_mac(byte_t mac[6]){
+bool proximoth_toolset_confirm_generated_mac(const byte_t mac[6]){
 
     if( proximoth_toolset_powm(mac[0],30,256) == mac[3] and \
         proximoth_toolset_powm(mac[1],40,256) == mac[4] and \
@@ -74,10 +74,8 @@ bool proximoth_toolset_confirm_generated_mac(byte_t mac[6]){
 }
 
 
-std::string proximoth_toolset_convert_mac_to_string(byte_t mac[6]){
-        char mac_string[12+6] = {0};
-        sprintf(mac_string,"%02hhX:%02hhX:%02hhX:%02hhX:%02hhX:%02hhX",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
-        std::string mac_string_ret(mac_string);
-        return mac_string_ret;
+void proximoth_toolset_convert_mac_to_string(const byte_t mac[6], char mac_string[PROXIMOTH_MAC_STRING_SIZE]){
+        snprintf(mac_string,PROXIMOTH_MAC_STRING_SIZE,"%02hhX:%02hhX:%02hhX:%02hhX:%02hhX:%02hhX",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
+        mac_string[PROXIMOTH_MAC_STRING_SIZE-1] = '\0'; // Just to make sure...
 }
 

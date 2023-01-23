@@ -1,4 +1,4 @@
-#include "../include/proximoth_radiotap.hpp"
+#include "../include/proximoth_radiotap.h"
 
 byte_t ieee80211_radiotap_template[8] = {0x00, 0x00, 0x08,0x00, 0x00, 0x00, 0x00, 0x00};
 
@@ -15,7 +15,7 @@ int ieee80211_radiotap_find_next_boundary(int current_byte_jump){
     return boundary;
 }
 
-int ieee80211_radiotap_cacluate_byte_jump(int frame_remaining_bytes, int field_alignment, int field_size){
+int ieee80211_radiotap_calculate_byte_jump(int frame_remaining_bytes, int field_alignment, int field_size){
 
     switch(frame_remaining_bytes){
         case 8:{ // O O O O O O O O O
@@ -121,28 +121,28 @@ int ieee80211_radiotap_cacluate_byte_jump(int frame_remaining_bytes, int field_a
 }
 
 void ieee80211_radiotap_initialize_align_size(struct ieee80211_radiotap_align_size radiotap_align_size[23]){
-	radiotap_align_size[IEEE80211_RADIOTAP_TSFT] = { .align = 8, .size = 8, };
-	radiotap_align_size[IEEE80211_RADIOTAP_FLAGS] = { .align = 1, .size = 1, };
-	radiotap_align_size[IEEE80211_RADIOTAP_RATE] = { .align = 1, .size = 1, };
-	radiotap_align_size[IEEE80211_RADIOTAP_CHANNEL] = { .align = 2, .size = 4, };
-	radiotap_align_size[IEEE80211_RADIOTAP_FHSS] = { .align = 2, .size = 2, };
-	radiotap_align_size[IEEE80211_RADIOTAP_DBM_ANTSIGNAL] = { .align = 1, .size = 1, };
-	radiotap_align_size[IEEE80211_RADIOTAP_DBM_ANTNOISE] = { .align = 1, .size = 1, };
-	radiotap_align_size[IEEE80211_RADIOTAP_LOCK_QUALITY] = { .align = 2, .size = 2, };
-	radiotap_align_size[IEEE80211_RADIOTAP_TX_ATTENUATION] = { .align = 2, .size = 2, };
-	radiotap_align_size[IEEE80211_RADIOTAP_DB_TX_ATTENUATION] = { .align = 2, .size = 2, };
-	radiotap_align_size[IEEE80211_RADIOTAP_DBM_TX_POWER] = { .align = 1, .size = 1, };
-	radiotap_align_size[IEEE80211_RADIOTAP_ANTENNA] = { .align = 1, .size = 1, };
-	radiotap_align_size[IEEE80211_RADIOTAP_DB_ANTSIGNAL] = { .align = 1, .size = 1, };
-	radiotap_align_size[IEEE80211_RADIOTAP_DB_ANTNOISE] = { .align = 1, .size = 1, };
-	radiotap_align_size[IEEE80211_RADIOTAP_RX_FLAGS] = { .align = 2, .size = 2, };
-	radiotap_align_size[IEEE80211_RADIOTAP_TX_FLAGS] = { .align = 2, .size = 2, };
-	radiotap_align_size[IEEE80211_RADIOTAP_RTS_RETRIES] = { .align = 1, .size = 1, };
-	radiotap_align_size[IEEE80211_RADIOTAP_DATA_RETRIES] = { .align = 1, .size = 1, };
-	radiotap_align_size[IEEE80211_RADIOTAP_MCS] = { .align = 1, .size = 3, }; // 1-1-1
-	radiotap_align_size[IEEE80211_RADIOTAP_AMPDU_STATUS] = { .align = 4, .size = 8, };
-	radiotap_align_size[IEEE80211_RADIOTAP_VHT] = { .align = 2, .size = 12, };
-	radiotap_align_size[IEEE80211_RADIOTAP_TIMESTAMP] = { .align = 8, .size = 12, }; // 8-2-1-1
+	radiotap_align_size[IEEE80211_RADIOTAP_TSFT]                = (struct ieee80211_radiotap_align_size){ .align = 8, .size = 8 };
+	radiotap_align_size[IEEE80211_RADIOTAP_FLAGS]               = (struct ieee80211_radiotap_align_size){ .align = 1, .size = 1, };
+	radiotap_align_size[IEEE80211_RADIOTAP_RATE]                = (struct ieee80211_radiotap_align_size){ .align = 1, .size = 1, };
+	radiotap_align_size[IEEE80211_RADIOTAP_CHANNEL]             = (struct ieee80211_radiotap_align_size){ .align = 2, .size = 4, };
+	radiotap_align_size[IEEE80211_RADIOTAP_FHSS]                = (struct ieee80211_radiotap_align_size){ .align = 2, .size = 2, };
+	radiotap_align_size[IEEE80211_RADIOTAP_DBM_ANTSIGNAL]       = (struct ieee80211_radiotap_align_size){ .align = 1, .size = 1, };
+	radiotap_align_size[IEEE80211_RADIOTAP_DBM_ANTNOISE]        = (struct ieee80211_radiotap_align_size){ .align = 1, .size = 1, };
+	radiotap_align_size[IEEE80211_RADIOTAP_LOCK_QUALITY]        = (struct ieee80211_radiotap_align_size){ .align = 2, .size = 2, };
+	radiotap_align_size[IEEE80211_RADIOTAP_TX_ATTENUATION]      = (struct ieee80211_radiotap_align_size){ .align = 2, .size = 2, };
+	radiotap_align_size[IEEE80211_RADIOTAP_DB_TX_ATTENUATION]   = (struct ieee80211_radiotap_align_size){ .align = 2, .size = 2, };
+	radiotap_align_size[IEEE80211_RADIOTAP_DBM_TX_POWER]        = (struct ieee80211_radiotap_align_size){ .align = 1, .size = 1, };
+	radiotap_align_size[IEEE80211_RADIOTAP_ANTENNA]             = (struct ieee80211_radiotap_align_size){ .align = 1, .size = 1, };
+	radiotap_align_size[IEEE80211_RADIOTAP_DB_ANTSIGNAL]        = (struct ieee80211_radiotap_align_size){ .align = 1, .size = 1, };
+	radiotap_align_size[IEEE80211_RADIOTAP_DB_ANTNOISE]         = (struct ieee80211_radiotap_align_size){ .align = 1, .size = 1, };
+	radiotap_align_size[IEEE80211_RADIOTAP_RX_FLAGS]            = (struct ieee80211_radiotap_align_size){ .align = 2, .size = 2, };
+	radiotap_align_size[IEEE80211_RADIOTAP_TX_FLAGS]            = (struct ieee80211_radiotap_align_size){ .align = 2, .size = 2, };
+	radiotap_align_size[IEEE80211_RADIOTAP_RTS_RETRIES]         = (struct ieee80211_radiotap_align_size){ .align = 1, .size = 1, };
+	radiotap_align_size[IEEE80211_RADIOTAP_DATA_RETRIES]        = (struct ieee80211_radiotap_align_size){ .align = 1, .size = 1, };
+	radiotap_align_size[IEEE80211_RADIOTAP_MCS]                 = (struct ieee80211_radiotap_align_size){ .align = 1, .size = 3, }; // 1-1-1
+	radiotap_align_size[IEEE80211_RADIOTAP_AMPDU_STATUS]        = (struct ieee80211_radiotap_align_size){ .align = 4, .size = 8, };
+	radiotap_align_size[IEEE80211_RADIOTAP_VHT]                 = (struct ieee80211_radiotap_align_size){ .align = 2, .size = 12, };
+	radiotap_align_size[IEEE80211_RADIOTAP_TIMESTAMP]           = (struct ieee80211_radiotap_align_size){ .align = 8, .size = 12, }; // 8-2-1-1
 
 
 }
@@ -220,7 +220,7 @@ byte_t* ieee80211_radiotap_header_find_field(enum ieee80211_radiotap_presence fi
             current_field_size = ieee80211_radiotap_namespaces[field_index_counter].size;
             current_field_alignment = ieee80211_radiotap_namespaces[field_index_counter].align;
             int remaining_bytes_for_alignment = ieee80211_radiotap_find_next_boundary(total_byte_jump) - total_byte_jump;
-            int current_byte_jump = ieee80211_radiotap_cacluate_byte_jump(remaining_bytes_for_alignment,current_field_alignment,current_field_size);
+            int current_byte_jump = ieee80211_radiotap_calculate_byte_jump(remaining_bytes_for_alignment,current_field_alignment,current_field_size);
             total_byte_jump += current_byte_jump;
 
         }

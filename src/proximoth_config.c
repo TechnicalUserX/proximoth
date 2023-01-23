@@ -1,12 +1,13 @@
-#include "../include/proximoth_config.hpp"
-#include "../include/proximoth_error.hpp"
-#include "../include/proximoth_misc_tools.hpp"
-#include "../include/proximoth_display_manager.hpp"
-#include "../include/proximoth_frame_sniffer.hpp"
-#include "../include/proximoth_rts_injector.hpp"
-#include "../include/proximoth_signal.hpp"
-#include "../include/proximoth_interface_mgmt.hpp"
-#include "../include/proximoth_radiotap.hpp"
+#include "../include/proximoth_config.h"
+#include "../include/proximoth_error.h"
+#include "../include/proximoth_toolset.h"
+#include "../include/proximoth_display_manager.h"
+#include "../include/proximoth_frame_sniffer.h"
+#include "../include/proximoth_rts_injector.h"
+#include "../include/proximoth_signal.h"
+#include "../include/proximoth_interface_mgmt.h"
+#include "../include/proximoth_radiotap.h"
+
 
 char proximoth_config_dump_file[PROXIMOTH_CONFIG_DUMP_FILE_MAXLEN+1] = {0};
 
@@ -82,11 +83,15 @@ static const struct option long_options[] = {
 int proximoth_config(int argc, char* argv[]){
 
     // Synchronising the streams of C++ and C...
-    std::ios_base::sync_with_stdio(true);
 
     // Seeding the PRNG...
     srandom(time(NULL));
 
+    proximoth_config_flags = (struct proximoth_config_flags_t){0};
+
+    if(sem_init(&proximoth_display_access,false,1) != 0){
+        return PROXIMOTH_ERROR_SEMAPHORE_CANNOT_INIT;
+    }
 
     gettimeofday(&proximoth_config_start_time,0);
     time_t epoch = time(NULL); //Getting epoch...
@@ -238,7 +243,7 @@ int proximoth_config(int argc, char* argv[]){
 
 
             case 'b':{
-                if(!proximoth_toolset_validate_mac_address(optarg)){
+                if(!proximoth_toolset_validate_mac_string(optarg)){
                     return PROXIMOTH_ERROR_BSSID_MAC_INVALID;
                 }
 
@@ -288,7 +293,7 @@ int proximoth_config(int argc, char* argv[]){
 
     
     char temp_target_mac[6] = {0};
-    if(!proximoth_toolset_validate_mac_address(argv[optind])){
+    if(!proximoth_toolset_validate_mac_string(argv[optind])){
         return PROXIMOTH_ERROR_TARGET_MAC_INVALID;
     }
 
@@ -318,6 +323,10 @@ int proximoth_config(int argc, char* argv[]){
     }
 
     if(proximoth_config_flags.f){
+        char bssid_mac[PROXIMOTH_MAC_STRING_SIZE] = {0};
+        char target_mac[PROXIMOTH_MAC_STRING_SIZE] = {0};
+        proximoth_toolset_convert_mac_to_string(proximoth_config_bssid_mac,bssid_mac);
+        proximoth_toolset_convert_mac_to_string(proximoth_config_target_mac,target_mac);
 
         fprintf(proximoth_config_file_out,  "[=============================================================]\n"
                                             "                    Proximoth (Version %s)\n"
@@ -327,8 +336,8 @@ int proximoth_config(int argc, char* argv[]){
                                             " - Interface   : %s (Channel: %d)\n"
                                             "[=============================================================]\n",\
                                             PROXIMOTH_VERSION,
-                                            proximoth_toolset_convert_mac_to_string(proximoth_config_bssid_mac).c_str(),\
-                                            proximoth_toolset_convert_mac_to_string(proximoth_config_target_mac).c_str(),\
+                                            bssid_mac,\
+                                            target_mac,\
                                             proximoth_interface_name,\
                                             proximoth_interface_channel);
         fflush(proximoth_config_file_out);

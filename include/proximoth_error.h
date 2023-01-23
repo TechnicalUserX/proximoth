@@ -1,7 +1,7 @@
-#ifndef _PROXIMOTH_ERROR_HPP
-#define _PROXIMOTH_ERROR_HPP
+#ifndef PROXIMOTH_ERROR_H
+#define PROXIMOTH_ERROR_H
 
-#include "proximoth.hpp"
+#include "proximoth.h"
 
 #define PROXIMOTH_SUCCESS 0x0
 #define PROXIMOTH_ERROR_GENERIC 0x1
@@ -21,6 +21,7 @@
 #define PROXIMOTH_ERROR_PCAP_FILE_CANNOT_CREATE 0x0801
 #define PROXIMOTH_ERROR_SIGNAL_BAD_INIT 0x0901
 #define PROXIMOTH_ERROR_IOCTL           0x0A01
-std::string proximoth_error_get_message(int error_code);
+#define PROXIMOTH_ERROR_SEMAPHORE_CANNOT_INIT 0x0B01
+const char* proximoth_error_get_message(int error_code);
 
 #endif

@@ -1,11 +1,11 @@
-#ifndef _PROXIMOTH_DISPLAY_MANAGER_HPP
-#define _PROXIMOTH_DISPLAY_MANAGER_HPP
+#ifndef PROXIMOTH_DISPLAY_MANAGER_H
+#define PROXIMOTH_DISPLAY_MANAGER_H
 
-#include "proximoth.hpp"
-
-
+#include "proximoth.h"
 
 extern pthread_t proximoth_display_manager_panel_updater_thread;
+
+extern sem_t proximoth_display_access;
 
 extern bool proximoth_display_manager_panel_updater_thread_shutdown_request;
 

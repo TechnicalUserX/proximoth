@@ -1,8 +1,8 @@
-#include "../include/proximoth_threads.hpp"
-#include "../include/proximoth_error.hpp"
-#include "../include/proximoth_display_manager.hpp"
-#include "../include/proximoth_frame_sniffer.hpp"
-#include "../include/proximoth_rts_injector.hpp"
+#include "../include/proximoth_threads.h"
+#include "../include/proximoth_error.h"
+#include "../include/proximoth_display_manager.h"
+#include "../include/proximoth_frame_sniffer.h"
+#include "../include/proximoth_rts_injector.h"
 
 int proximoth_threads_start(void){
     if(pthread_create(&proximoth_display_manager_panel_updater_thread,NULL,proximoth_display_manager_panel_updater,NULL)){

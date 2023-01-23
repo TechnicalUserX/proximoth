@@ -1,18 +1,22 @@
-#include "../include/proximoth_display_manager.hpp"
-#include "../include/proximoth_config.hpp"
-#include "../include/proximoth_misc_tools.hpp"
-#include "../include/proximoth_frame_sniffer.hpp"
-#include "../include/proximoth_rts_injector.hpp"
-#include "../include/proximoth_interface_mgmt.hpp"
-#include "../include/proximoth_error.hpp"
+#include "../include/proximoth_display_manager.h"
+#include "../include/proximoth_config.h"
+#include "../include/proximoth_toolset.h"
+#include "../include/proximoth_frame_sniffer.h"
+#include "../include/proximoth_rts_injector.h"
+#include "../include/proximoth_interface_mgmt.h"
+#include "../include/proximoth_error.h"
 
 
 pthread_t proximoth_display_manager_panel_updater_thread;
 
+sem_t proximoth_display_access;
+
+
 bool proximoth_display_manager_panel_updater_thread_shutdown_request = false;
 
 void proximoth_display_manager_panel_print(void){
-
+    sem_wait(&proximoth_display_access);
+    system("clear");
     struct winsize w;
     if(ioctl(0, TIOCGWINSZ, &w) == -1){
         exit(PROXIMOTH_ERROR_IOCTL);
@@ -46,12 +50,12 @@ void proximoth_display_manager_panel_print(void){
         printf(COLOR RGB(255,0,0) "Low terminal\nresolution\n" CLEAR);
     }
     fflush(stdout);
+    sem_post(&proximoth_display_access);
 
 }
 
 void* proximoth_display_manager_panel_updater(void* arg){
 
-    system("clear");
     proximoth_display_manager_panel_print();
 
     while(1){
@@ -70,21 +74,26 @@ void proximoth_display_set_cursor(int row, int col){
     printf("\033[%d;%dH",row,col);
     fflush(stdout);
 }
-
+    
 void proximoth_display_manager_panel_print_constants(void){
 
-    std::string bssid_mac_string = proximoth_toolset_convert_mac_to_string(proximoth_config_bssid_mac);
-    std::string target_mac_string = proximoth_toolset_convert_mac_to_string(proximoth_config_target_mac);
+    sem_wait(&proximoth_display_access);
+
+    char bssid_mac_string[PROXIMOTH_MAC_STRING_SIZE] = {0};
+    char target_mac_string[PROXIMOTH_MAC_STRING_SIZE] = {0};
+
+    proximoth_toolset_convert_mac_to_string(proximoth_config_bssid_mac,bssid_mac_string);
+    proximoth_toolset_convert_mac_to_string(proximoth_config_target_mac,target_mac_string);
 
     struct winsize w;
     ioctl(0, TIOCGWINSZ, &w);
 
     if(w.ws_col > 84 and w.ws_row > 14){
         proximoth_display_set_cursor(5,16);
-        printf(COLOR BOLD RGB(75, 126, 163) "%s" CLEAR,bssid_mac_string.c_str());
+        printf(COLOR BOLD RGB(75, 126, 163) "%s" CLEAR,bssid_mac_string);
 
         proximoth_display_set_cursor(6,16);
-        printf(COLOR BOLD RGB(123, 174, 212) "%s" CLEAR,target_mac_string.c_str());
+        printf(COLOR BOLD RGB(123, 174, 212) "%s" CLEAR,target_mac_string);
 
         proximoth_display_set_cursor(7,16);
         printf(COLOR BOLD RGB(184, 225, 255) "%-16s" CLEAR COLOR BOLD RGB(184, 225, 255) "(Ch: %d)" CLEAR,proximoth_interface_name,proximoth_interface_channel);
@@ -92,17 +101,20 @@ void proximoth_display_manager_panel_print_constants(void){
     }else if(w.ws_col > 32 and w.ws_row > 12){
 
         proximoth_display_set_cursor(5,12);
-        printf(COLOR BOLD RGB(123, 174, 212) "%s" CLEAR,target_mac_string.c_str());
+        printf(COLOR BOLD RGB(123, 174, 212) "%s" CLEAR,target_mac_string);
 
     }
 
     proximoth_display_set_cursor(14,1);
     fflush(stdout);
+    sem_post(&proximoth_display_access);
 
 }
 
 void proximoth_display_manager_panel_print_elapsed_time(void){
     
+    sem_wait(&proximoth_display_access);
+
     struct winsize w;
     ioctl(0, TIOCGWINSZ, &w);
 
@@ -118,10 +130,13 @@ void proximoth_display_manager_panel_print_elapsed_time(void){
         proximoth_display_set_cursor(14,1);
         fflush(stdout);
     }
-    
+
+    sem_post(&proximoth_display_access);
 }
 
 void proximoth_display_manager_panel_print_parameters(void){
+    
+    sem_wait(&proximoth_display_access);
 
     uint64_t epoch = proximoth_cts_last_time.tv_sec;
     epoch %= 3600*24;
@@ -207,5 +222,6 @@ void proximoth_display_manager_panel_print_parameters(void){
         fflush(stdout);
 
     }
+    sem_post(&proximoth_display_access);
 
 }

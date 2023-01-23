@@ -1,7 +1,7 @@
-#ifndef _PROXIMOTH_FRAME_SNIFFER_HPP
-#define _PROXIMOTH_FRAME_SNIFFER_HPP
+#ifndef PROXIMOTH_FRAME_SNIFFER_H
+#define PROXIMOTH_FRAME_SNIFFER_H
 
-#include "proximoth.hpp"
+#include "proximoth.h"
 
 #define IEEE80211_FRAME_CONTROL_CTS 0b11000100
 

@@ -1,7 +1,7 @@
-#ifndef _PROXIMOTH_INTERFACE_MGMT_HPP
-#define _PROXIMOTH_INTERFACE_MGMT_HPP
+#ifndef PROXIMOTH_INTERFACE_MGMT_H
+#define PROXIMOTH_INTERFACE_MGMT_H
 
-#include "proximoth.hpp"
+#include "proximoth.h"
 
 typedef enum{
     PROXIMOTH_INTERFACE_MODE_AUTO		= IW_MODE_AUTO,
@@ -19,7 +19,7 @@ typedef enum{
 }proximoth_interface_state_t;
 
 
-double proximoth_convert_freq_to_float(struct iw_freq* freq);
+double proximoth_interface_convert_freq_to_float(struct iw_freq* freq);
 
 int proximoth_interface_get_mode(const char* iface_name,proximoth_interface_mode_t* mode);
 
