@@ -22,7 +22,7 @@ void proximoth_display_manager_panel_print(void){
         exit(PROXIMOTH_ERROR_IOCTL);
     }
 
-    if(w.ws_col > 84 and w.ws_row > 14){
+    if(w.ws_col > 84 && w.ws_row > 14){
         printf(" ╰┤" COLOR RGB(0, 182, 220) "Proximoth" CLEAR "├╯\n"
         " ╭──────────────────────────────────────────────────────────────────────────────────╮\n"
         " │ State:                                                                           │\n"
@@ -35,7 +35,7 @@ void proximoth_display_manager_panel_print(void){
         " │ Total Frames Catched :                                         ├─────────────────┤\n"
         " │ Time elapsed(sec)    :                                         │                 │\n"
         " ╰────────────────────────────────────────────────────────────────┴─────────────────╯\n\n");
-    }else if(w.ws_col > 32 and w.ws_row > 12){
+    }else if(w.ws_col > 32 && w.ws_row > 12){
         printf(" ╰┤" COLOR RGB(0, 182, 220) "Proximoth" CLEAR "├╯\n"
         " ╭───────────────────────────╮\n"
         " │                           │\n"
@@ -88,7 +88,7 @@ void proximoth_display_manager_panel_print_constants(void){
     struct winsize w;
     ioctl(0, TIOCGWINSZ, &w);
 
-    if(w.ws_col > 84 and w.ws_row > 14){
+    if(w.ws_col > 84 && w.ws_row > 14){
         proximoth_display_set_cursor(5,16);
         printf(COLOR BOLD RGB(75, 126, 163) "%s" CLEAR,bssid_mac_string);
 
@@ -98,7 +98,7 @@ void proximoth_display_manager_panel_print_constants(void){
         proximoth_display_set_cursor(7,16);
         printf(COLOR BOLD RGB(184, 225, 255) "%-16s" CLEAR COLOR BOLD RGB(184, 225, 255) "(Ch: %d)" CLEAR,proximoth_interface_name,proximoth_interface_channel);
 
-    }else if(w.ws_col > 32 and w.ws_row > 12){
+    }else if(w.ws_col > 32 && w.ws_row > 12){
 
         proximoth_display_set_cursor(5,12);
         printf(COLOR BOLD RGB(123, 174, 212) "%s" CLEAR,target_mac_string);
@@ -124,7 +124,7 @@ void proximoth_display_manager_panel_print_elapsed_time(void){
     current.tv_sec += proximoth_config_time_gmt_offset;
     elapsed_time = current.tv_sec - proximoth_config_start_time.tv_sec;
 
-    if(w.ws_col > 84 and w.ws_row > 14){
+    if(w.ws_col > 84 && w.ws_row > 14){
         proximoth_display_set_cursor(11,27);
         printf(COLOR RGB(250, 172, 187) "%lu" CLEAR,elapsed_time);
         proximoth_display_set_cursor(14,1);
@@ -146,7 +146,7 @@ void proximoth_display_manager_panel_print_parameters(void){
     struct winsize w;
     ioctl(0, TIOCGWINSZ, &w);
 
-    if(w.ws_col > 84 and w.ws_row > 14){
+    if(w.ws_col > 84 && w.ws_row > 14){
 
         proximoth_display_set_cursor(5,64);
         printf(COLOR BOLD RGB(21, 138, 69) "%.6lf" CLEAR,proximoth_cts_catch_period);
@@ -186,7 +186,7 @@ void proximoth_display_manager_panel_print_parameters(void){
 
         proximoth_display_set_cursor(14,1);
         fflush(stdout);
-    }else if(w.ws_col > 32 and w.ws_row > 12){
+    }else if(w.ws_col > 32 && w.ws_row > 12){
 
         proximoth_display_set_cursor(9,9);
         printf(COLOR BOLD RGB(48, 179, 102) "%lu" CLEAR,proximoth_cts_total_catched);

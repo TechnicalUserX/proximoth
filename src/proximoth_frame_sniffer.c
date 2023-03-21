@@ -64,7 +64,7 @@ void* proximoth_frame_sniffer(void* arg){
 
             struct ieee80211_clear_to_send* cts = (struct ieee80211_clear_to_send*)frame;
 
-            if(proximoth_toolset_confirm_generated_mac(cts->receiver_address)){
+            if(memcmp(cts->receiver_address,proximoth_config_bssid_mac,6) == 0){
 
                 // CTS Catch!
                 proximoth_cts_total_catched++;
@@ -85,7 +85,7 @@ void* proximoth_frame_sniffer(void* arg){
                 }
 
 
-                if(proximoth_cts_last_time.tv_sec == 0 and proximoth_cts_last_time.tv_usec == 0){
+                if(proximoth_cts_last_time.tv_sec == 0 && proximoth_cts_last_time.tv_usec == 0){
                     double current_period = (current_time.tv_sec - proximoth_config_start_time.tv_sec) + (current_time.tv_usec*1e-6 - proximoth_config_start_time.tv_usec*1e-6);
 
                     if(proximoth_config_flags.f){

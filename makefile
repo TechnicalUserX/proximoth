@@ -21,8 +21,6 @@ ${BUILD_OBJ_DIR}/%.o: src/%.c include/%.h
 	$(shell if ! [ -d ${BUILD_OBJ_DIR} ]; then ${MKDIR_P} ${BUILD_OBJ_DIR}; fi)
 	${CC} -c $< -o $@
 
-run:
-	@cd ${BUILD_DIR}; ./${OUT}
 
 
 clean:

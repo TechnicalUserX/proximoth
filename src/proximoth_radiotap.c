@@ -152,7 +152,7 @@ byte_t* ieee80211_radiotap_header_find_field(enum ieee80211_radiotap_presence fi
     static byte_t* bytes = NULL;
 
     // If first usage of this function includes a NULL pointer to frame bytes, there is no point to proceed.
-    if(bytes == frame_bytes and frame_bytes == NULL){
+    if(bytes == frame_bytes && frame_bytes == NULL){
         return NULL;
     }
 
@@ -160,7 +160,7 @@ byte_t* ieee80211_radiotap_header_find_field(enum ieee80211_radiotap_presence fi
     static size_t wanted_occurence = 1;
     static size_t seen_occurence = 0;
 
-    if(frame_bytes != NULL and bytes != frame_bytes){
+    if(frame_bytes != NULL && bytes != frame_bytes){
         bytes = frame_bytes;
         wanted_occurence = 1;
         wanted_field = field_index;
@@ -169,10 +169,10 @@ byte_t* ieee80211_radiotap_header_find_field(enum ieee80211_radiotap_presence fi
         wanted_occurence = 1;
         wanted_field = field_index;
     }
-    else if(frame_bytes == NULL and wanted_field == field_index){
+    else if(frame_bytes == NULL && wanted_field == field_index){
         wanted_occurence++;
     }
-    else if(frame_bytes == NULL and wanted_field != field_index){
+    else if(frame_bytes == NULL && wanted_field != field_index){
         wanted_occurence = 1;
         wanted_field = field_index;
     }
@@ -214,7 +214,7 @@ byte_t* ieee80211_radiotap_header_find_field(enum ieee80211_radiotap_presence fi
             if(bit_mask & search_field)
                 seen_occurence++;
 
-            if(( (bit_mask & search_field) and (seen_occurence == wanted_occurence) ))
+            if(( (bit_mask & search_field) && (seen_occurence == wanted_occurence) ))
                 break;
 
             current_field_size = ieee80211_radiotap_namespaces[field_index_counter].size;
@@ -228,7 +228,7 @@ byte_t* ieee80211_radiotap_header_find_field(enum ieee80211_radiotap_presence fi
         field_index_counter++;
         bit_mask <<= 1;
 
-        if( (field_index_counter == 31 ) and (bit_mask & present_flags) and (bit_mask & 1<<IEEE80211_RADIOTAP_EXT)){
+        if( (field_index_counter == 31 ) && (bit_mask & present_flags) && (bit_mask & 1<<IEEE80211_RADIOTAP_EXT)){
             // This means there are STILL flags and there are STILL data!
             present_flags_index++;
             present_flags = *((uint32_t*)((bytes+4)+(4*present_flags_index)));
@@ -238,7 +238,7 @@ byte_t* ieee80211_radiotap_header_find_field(enum ieee80211_radiotap_presence fi
             continue;
         }
         
-        if(field_index_counter == 31 and !(bit_mask & present_flags) ){
+        if(field_index_counter == 31 && !(bit_mask & present_flags) ){
             // Couldn't find!
             return NULL;
         }

@@ -19,7 +19,7 @@ void proximoth_signal_program_interrupt(int sig){
         exit(PROXIMOTH_SUCCESS);
     }
 
-    if(proximoth_config_finished and proximoth_config_flags.f){
+    if(proximoth_config_finished && proximoth_config_flags.f){
 
         struct timeval current;
         gettimeofday(&current,0);

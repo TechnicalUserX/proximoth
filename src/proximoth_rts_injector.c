@@ -76,7 +76,7 @@ void proximoth_rts_injector_wait(void){
                 if(frame[0] == IEEE80211_FRAME_CONTROL_RTS){
                     struct ieee80211_request_to_send* rts;
                     rts = (struct ieee80211_request_to_send*)frame;
-                    if(proximoth_toolset_confirm_generated_mac(rts->transmitter_address)){
+                    if(proximoth_toolset_confirm_generated_mac(rts->transmitter_address) || proximoth_toolset_confirm_generated_mac(rts->receiver_address)){
                         rts_seen = time(NULL);
                         write(fd[1],&rts_seen,sizeof(time_t));
                     }

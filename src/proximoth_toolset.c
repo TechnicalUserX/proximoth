@@ -35,7 +35,7 @@ bool proximoth_toolset_validate_mac_string(const char* mac_string){
         
 
         }else{
-            if( !( (c >= 'a' and c <= 'f') or (c >= '0' and c <= '9') ) ){
+            if( !( (c >= 'a' && c <= 'f') || (c >= '0' && c <= '9') ) ){
                 return false;
             }
         }
@@ -60,8 +60,8 @@ void proximoth_toolset_generate_random_mac(byte_t mac[6]){
 
 bool proximoth_toolset_confirm_generated_mac(const byte_t mac[6]){
 
-    if( proximoth_toolset_powm(mac[0],30,256) == mac[3] and \
-        proximoth_toolset_powm(mac[1],40,256) == mac[4] and \
+    if( proximoth_toolset_powm(mac[0],30,256) == mac[3] && \
+        proximoth_toolset_powm(mac[1],40,256) == mac[4] && \
         proximoth_toolset_powm(mac[2],50,256) == mac[5] )
     {
 

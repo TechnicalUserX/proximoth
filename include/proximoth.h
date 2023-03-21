@@ -31,7 +31,6 @@
 #include <linux/wireless.h>
 #include <sys/ioctl.h>
 #include <ifaddrs.h>
-#include <iso646.h>
 
 
 #define PROXIMOTH_MAC_STRING_SIZE 18 // 17+1
