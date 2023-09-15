@@ -1,0 +1,73 @@
+.\" Title: proximoth
+.\" Author: Check AUTHORS file
+.\" Date: @PROXIMOTH_DATE@
+.\" Manual: Proximoth Manual
+.\" Language: English
+
+.TH "PROXIMOTH" "1" "@PROXIMOTH_DATE@" "@PROXIMOTH_VERSION@" "Proximoth Manual"
+
+.SH NAME
+\fBproximoth\fR \- Control Frame Attack Vulnerability Detection Tool
+
+.SH SYNOPSIS
+\fBproximoth\fR [options] <target>
+
+.SH DESCRIPTION
+.P
+Proximoth is a command line tool to detect \fBproximal privacy violation vulnerability\fR in wireless chipsets with
+\fBControl Frame Attack\fR. This vulnerability lets an attacker detect the presence of the Wi-Fi device within range
+by using the global MAC address of it. Proximoth basically replicates this attack to achieve this goal.
+.P
+Proximoth does not discover the global MAC address of the target, but it assumes that you already know it or gathered it before.
+The expected behaviour from a vulnerable device is to respond with a CTS frame when an RTS frame was sent to its global MAC address.
+.P
+\fB<target>\fR is the global MAC address of the target Wi-Fi device.
+.SH DISCLAIMER
+.P
+This software is distributed in the hope that it will be useful, but without a warranty.
+No responsibility will be taken for any illegal activity, use it at your own risk.
+
+.SH OPTIONS
+.P
+\fB\-o <file>, \-\-out-file <file>\fR
+        File to write statistics after shutdown.
+.P
+\fB\-b <bssid>, \-\-bssid <bssid>\fR
+        Custom BSSID to be injected as sender MAC address.
+        Address is fixed automatically to be global and unicast.
+.P
+\fB\-a, \-\-no-mac\-autofix\fR
+        Disables unicast/global auto fix for BSSID MAC addresses.
+.P
+\fB\-i <iface>, \-\-interface <iface>\fR
+        Wireless interface to use packet injection and sniffing.
+        Obligatory option.
+.P
+\fB\-d <file>, \-\-dump-file <file>\fR
+        Write all CTS captures to a PCAP file.
+.P
+\fB\-r <us>, \-\-rts\-interval <us>\fR
+        Microseconds as threshold to wait between RTS injections.
+        Setting it to a low value might cause malfunction.
+        Default: 500000
+.P
+\fB\-t, \-\-text\-mode\fR
+        Enables text only mode.
+.P
+\fB\-\-version\fR
+        Prints version number and author information.
+.SH EXAMPLES
+.P
+$ sudo \fBproximoth\fR -i wlan0 10:DA:41:E8:FA:DC
+.P
+$ sudo \fBproximoth\fR -i wlan0 10:DA:41:E8:FA:DC --dump-file dump --out-file record
+.P
+$ sudo \fBproximoth\fR -i wlan0 10:DA:41:E8:FA:DC --rts-interval 100000
+.P
+$ sudo \fBproximoth\fR -i wlan0 10:DA:41:E8:FA:DC -b 1C:CC:D6:00:00:00
+
+.SH SEE ALSO
+.P
+https://www.researchgate.net/publication/314361145_A_Study_of_MAC_Address_Randomization_in_Mobile_Devices_and_When_it_Fails
+.P
+https://technicaluserx.wordpress.com/2022/07/22/proximoth

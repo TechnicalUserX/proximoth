@@ -1,0 +1,13 @@
+# Proximoth Dockerfile
+# Avoid Unnecessary Additions
+./.dockerignore
+./Dockerfile
+./.gitignore
+./images
+./build
+./.vscode
+./LICENSE
+./README.md
+./docs
+./CHANGELOG.md
+./AUTHORS
