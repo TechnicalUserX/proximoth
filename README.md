@@ -32,6 +32,7 @@ $ sudo apt-get install libpcap-dev gcc make gzip
 $ git clone https://github.com/TechnicalUserX/proximoth.git
 $ cd proximoth
 $ make
+$ sudo make install
 ```
 
 ## Put The Interface In Monitor Mode (Obligatory)

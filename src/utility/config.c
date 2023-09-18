@@ -70,6 +70,13 @@ void proximoth_config_print_version(void){
 
 void proximoth_config(int argc, char* argv[]){
 
+
+    if(argc == 1){
+        proximoth_config_print_usage();
+        proximoth_error = PROXIMOTH_SUCCESS;
+        exit((int)PROXIMOTH_SUCCESS);
+    }
+
     gettimeofday(&proximoth_config_start_time, NULL);
 
     if(atexit(proximoth_config_reset) != 0){
