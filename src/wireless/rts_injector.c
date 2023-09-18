@@ -4,6 +4,7 @@
 #include <proximoth/wireless/cts_sniffer.h>
 #include <proximoth/wireless/rts_injector.h>
 #include <proximoth/wireless/radiotap.h>
+#include <proximoth/wireless/interface.h>
 
 pthread_t proximoth_rts_injector_thread;
 
@@ -16,11 +17,11 @@ suseconds_t proximoth_rts_interval = 500000;
 void* proximoth_rts_injector(void* arg){
     // arg is not used
 
-    pcap_t* handle = (pcap_t*)proximoth_config_interface_handle;
+    pcap_t* handle = (pcap_t*)proximoth_interface_handle;
     
     byte_t frame[sizeof(proximoth_radiotap_template) + sizeof(struct proximoth_request_to_send)];
 
-    struct proximoth_request_to_send rts;
+    struct proximoth_request_to_send rts = {0};
     rts.version = 0x0; 
     rts.type = 0x1; 
     rts.subtype = 0xB; //0b1011;

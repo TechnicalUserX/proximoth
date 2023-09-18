@@ -25,6 +25,8 @@ extern proximoth_interface_mode_t proximoth_interface_mode;
 
 extern proximoth_interface_state_t proximoth_interface_state;
 
+extern pcap_t* proximoth_interface_handle;
+
 extern char proximoth_interface_name[IFNAMSIZ];
 
 extern int proximoth_interface_socket;

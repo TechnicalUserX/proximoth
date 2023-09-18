@@ -22,8 +22,6 @@ bool proximoth_mac_validate_mac_string(const char* mac_string){
             if(c != ':'){
                 return false;                                 
             }
-        
-
         }else{
             if( !( (c >= 'a' && c <= 'f') || (c >= '0' && c <= '9') ) ){
                 return false;
@@ -37,11 +35,9 @@ bool proximoth_mac_validate_mac_string(const char* mac_string){
 void proximoth_mac_generate_random_mac(proximoth_mac_t mac){
 
     memset(mac,0x00,6);
-
     mac[0] = random() % 256; 
     mac[1] = random() % 256;
     mac[2] = random() % 256;
-
     mac[3] = random() % 256;
     mac[4] = random() % 256;
     mac[5] = random() % 256;

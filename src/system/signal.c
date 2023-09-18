@@ -1,7 +1,7 @@
 #include <proximoth/tui/display.h>
 #include <proximoth/utility/config.h>
 #include <proximoth/utility/error.h>
-#include <proximoth/utility/signal.h>
+#include <proximoth/system/signal.h>
 #include <proximoth/wireless/rts_injector.h>
 #include <proximoth/wireless/cts_sniffer.h>
 

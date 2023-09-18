@@ -24,6 +24,12 @@ const char* proximoth_error_get_message(proximoth_error_t error_code){
             return "Cannot retrieve the channel of the interface.";
         case PROXIMOTH_ERROR_INTERFACE_NOT_UP:
             return "Interface is not up.";
+        case PROXIMOTH_ERROR_INTERFACE_CANNOT_COMPILE_FILTER:
+            return "Cannot compile filter for interface.";
+        case PROXIMOTH_ERROR_INTERFACE_CANNOT_SET_FILTER:
+            return "Cannot set filter for interface.";
+        case PROXIMOTH_ERROR_INTERFACE_CANNOT_SET_NONBLOCK:
+            return "Cannot set non-block mode for interface.";
         case PROXIMOTH_ERROR_TARGET_MAC_INVALID:
             return "Provided MAC address is invalid.";
         case PROXIMOTH_ERROR_FILE_CANNOT_CREATE:

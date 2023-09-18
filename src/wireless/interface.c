@@ -6,6 +6,8 @@ proximoth_interface_mode_t proximoth_interface_mode;
 
 proximoth_interface_state_t proximoth_interface_state;
 
+pcap_t* proximoth_interface_handle = NULL;
+
 char proximoth_interface_name[IFNAMSIZ] = {0};
 
 int proximoth_interface_socket = -1;

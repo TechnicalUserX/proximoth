@@ -4,7 +4,7 @@
 #include <proximoth/wireless/cts_sniffer.h>
 #include <proximoth/wireless/rts_injector.h>
 #include <proximoth/tui/display.h>
-#include <proximoth/utility/signal.h>
+#include <proximoth/system/signal.h>
 #include <proximoth/utility/config.h>
 #include <proximoth/utility/error.h>
 #include <proximoth/version/version.h>
@@ -26,8 +26,6 @@ char proximoth_config_target_mac_string[PROXIMOTH_MAC_STRING_SIZE] = {0};
 FILE* proximoth_config_file_out = NULL;
 
 struct proximoth_config_flags_t proximoth_config_flags = {false};
-
-pcap_t* proximoth_config_interface_handle = NULL;
 
 atomic_bool proximoth_config_finished = false;
 
@@ -74,7 +72,6 @@ void proximoth_config(int argc, char* argv[]){
 
     gettimeofday(&proximoth_config_start_time, NULL);
 
-
     if(atexit(proximoth_config_reset) != 0){
         proximoth_error = PROXIMOTH_ERROR_ATEXIT;
         exit((int)PROXIMOTH_ERROR_ATEXIT);
@@ -101,7 +98,6 @@ void proximoth_config(int argc, char* argv[]){
 
     srandom(time(NULL));
 
-
     if((proximoth_interface_socket = socket(AF_INET,SOCK_STREAM,IPPROTO_TCP)) == -1){
         proximoth_error = PROXIMOTH_ERROR_SOCKET_CANNOT_CREATE;
         exit((int)PROXIMOTH_ERROR_SOCKET_CANNOT_CREATE);
@@ -113,15 +109,6 @@ void proximoth_config(int argc, char* argv[]){
     }
 
     proximoth_radiotap_initialize_align_size(proximoth_radiotap_namespaces);
-
-    struct sigaction proximoth_signal_action_window_resize = {0};
-    proximoth_signal_action_window_resize.sa_handler = proximoth_signal_display_resize_event;
-    proximoth_signal_action_window_resize.sa_flags = SA_RESTART;
-    
-    if(sigaction(SIGWINCH,&proximoth_signal_action_window_resize,NULL) == -1){
-        proximoth_error = PROXIMOTH_ERROR_SIGNAL_BAD_INIT;
-        exit((int)PROXIMOTH_ERROR_SIGNAL_BAD_INIT);
-    }
 
     struct sigaction proximoth_signal_action_interrupt = {0};
     proximoth_signal_action_interrupt.sa_handler = proximoth_signal_program_interrupt;
@@ -262,7 +249,7 @@ void proximoth_config(int argc, char* argv[]){
                     }
 
 
-                    if((proximoth_config_interface_handle = pcap_open_live(optarg,5000,1,150,proximoth_error_buffer)) == NULL){
+                    if((proximoth_interface_handle = pcap_open_live(optarg,5000,1,150,proximoth_error_buffer)) == NULL){
                         proximoth_error = PROXIMOTH_ERROR_INTERFACE_CANNOT_OPEN;
                         exit((int)PROXIMOTH_ERROR_INTERFACE_CANNOT_OPEN);
                     }
@@ -363,17 +350,29 @@ void proximoth_config(int argc, char* argv[]){
         proximoth_config_bssid_mac[0] &= 0xFC; // 0b11111100
     }
 
-    proximoth_mac_convert_mac_to_string(proximoth_config_bssid_mac,proximoth_config_bssid_mac_string);
-    proximoth_mac_convert_mac_to_string(proximoth_config_target_mac,proximoth_config_target_mac_string);
 
     if(!proximoth_config_flags.i){
         proximoth_error = PROXIMOTH_ERROR_INTERFACE_NOT_SPECIFIED;
         exit((int)PROXIMOTH_ERROR_INTERFACE_NOT_SPECIFIED);
     }
 
-    
-    if(proximoth_config_flags.o){
+    proximoth_mac_convert_mac_to_string(proximoth_config_bssid_mac,proximoth_config_bssid_mac_string);
+    proximoth_mac_convert_mac_to_string(proximoth_config_target_mac,proximoth_config_target_mac_string);
 
+    // Setting the filter for packet capturing.
+    char proximoth_config_capture_filter[128] = "not wlan addr2 ";
+    strncat(proximoth_config_capture_filter,proximoth_config_bssid_mac_string,PROXIMOTH_MAC_STRING_SIZE-1);
+    struct bpf_program filter = {0};
+    if(pcap_compile(proximoth_interface_handle,&filter,proximoth_config_capture_filter,0,PCAP_NETMASK_UNKNOWN)){
+        proximoth_error = PROXIMOTH_ERROR_INTERFACE_CANNOT_COMPILE_FILTER;
+        exit((int)PROXIMOTH_ERROR_INTERFACE_CANNOT_COMPILE_FILTER);
+    }
+    if(pcap_setfilter(proximoth_interface_handle,&filter)){
+        proximoth_error = PROXIMOTH_ERROR_INTERFACE_CANNOT_SET_FILTER;
+        exit((int)PROXIMOTH_ERROR_INTERFACE_CANNOT_SET_FILTER);
+    }
+
+    if(proximoth_config_flags.o){
         time_t t = proximoth_config_start_time.tv_sec;
         struct tm broken_start_time = *localtime(&t);
         char formatted_start_time[32] = {0};
@@ -421,11 +420,23 @@ void proximoth_config(int argc, char* argv[]){
             broken_start_time.tm_gmtoff);
 
         fflush(stdout);
+    }else{
+        proximoth_display_set_cursor_visibility(false);
+
+        struct sigaction proximoth_signal_action_window_resize = {0};
+        proximoth_signal_action_window_resize.sa_handler = proximoth_signal_display_resize_event;
+        proximoth_signal_action_window_resize.sa_flags = SA_RESTART;
+        
+        if(sigaction(SIGWINCH,&proximoth_signal_action_window_resize,NULL) == -1){
+            proximoth_error = PROXIMOTH_ERROR_SIGNAL_BAD_INIT;
+            exit((int)PROXIMOTH_ERROR_SIGNAL_BAD_INIT);
+        }
+
     }
 
     if(proximoth_config_flags.d){
 
-        proximoth_config_dump_handle = pcap_dump_open(proximoth_config_interface_handle,proximoth_config_dump_file);
+        proximoth_config_dump_handle = pcap_dump_open(proximoth_interface_handle,proximoth_config_dump_file);
         if(proximoth_config_dump_handle == NULL){
             proximoth_error = PROXIMOTH_ERROR_PCAP_FILE_CANNOT_CREATE;
             exit((int)PROXIMOTH_ERROR_FILE_CANNOT_CREATE);
@@ -433,9 +444,10 @@ void proximoth_config(int argc, char* argv[]){
         
     }
 
-    if(proximoth_config_flags.t == false)
-        proximoth_display_set_cursor_visibility(false);
-
+    if(pcap_setnonblock(proximoth_interface_handle,true,proximoth_error_buffer)){
+        proximoth_error = PROXIMOTH_ERROR_INTERFACE_CANNOT_SET_NONBLOCK;
+        exit((int)PROXIMOTH_ERROR_INTERFACE_CANNOT_SET_NONBLOCK);
+    }
 
     proximoth_config_finished = true;
     proximoth_error = PROXIMOTH_SUCCESS;
@@ -518,8 +530,8 @@ void proximoth_config_reset(void){
     if(proximoth_config_flags.d && proximoth_config_finished){
         pcap_dump_close(proximoth_config_dump_handle);
     }
-    if(proximoth_config_interface_handle != NULL)
-        pcap_close(proximoth_config_interface_handle);
+    if(proximoth_interface_handle != NULL)
+        pcap_close(proximoth_interface_handle);
 
     if(proximoth_config_flags.t == false)
         proximoth_display_set_cursor_visibility(true);

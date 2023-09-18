@@ -2,6 +2,7 @@
 #include <proximoth/wireless/cts_sniffer.h>
 #include <proximoth/wireless/radiotap.h>
 #include <proximoth/wireless/mac.h>
+#include <proximoth/wireless/interface.h>
 
 pthread_t proximoth_cts_sniffer_thread;
 
@@ -22,12 +23,11 @@ int8_t proximoth_cts_last_signal_strength = -100;
 void* proximoth_cts_sniffer(void* arg){
     // "arg" is not used
 
-    pcap_t* handle = (pcap_t*)proximoth_config_interface_handle;
+    pcap_t* handle = (pcap_t*)proximoth_interface_handle;
     
     struct pcap_pkthdr* hdr = NULL;
     const byte_t* data = NULL;
 
-    pcap_setnonblock(handle,true,proximoth_error_buffer);
 
     while(1){
 
@@ -92,7 +92,7 @@ void* proximoth_cts_sniffer(void* arg){
                 if(proximoth_config_flags.o){
                     static bool headers_printed = false;
                     if(headers_printed == false && proximoth_cts_total_catched > 0){
-                        fprintf(proximoth_config_file_out, "\n%-16s%-16s%-20s%-16s\n",
+                        fprintf(proximoth_config_file_out, "\n%-16s%-16s%-21s%-16s\n",
                         "EPOCH", "DATE", "TIME", "SIGNAL");
                         headers_printed = true;
 
@@ -113,7 +113,7 @@ void* proximoth_cts_sniffer(void* arg){
                     strftime(formatted_t_date,21,"%Y/%m/%d",&broken_t);
                     strftime(formatted_t_time,21,"%X",&broken_t);
 
-                    fprintf(proximoth_config_file_out,"%-16ld%-16s%-8s.%06ld     dBm %-16hhd\n", 
+                    fprintf(proximoth_config_file_out,"%-16ld%-16s%-8s.%06ld      dBm %-16hhd\n", 
                         t,
                         formatted_t_date,
                         formatted_t_time,
@@ -127,7 +127,7 @@ void* proximoth_cts_sniffer(void* arg){
                 if(proximoth_config_flags.t){
                     static bool headers_printed = false;
                     if(headers_printed == false && proximoth_cts_total_catched > 0){
-                        fprintf(stdout, "\n%-16s%-16s%-20s%-16s\n",
+                        fprintf(stdout, "\n%-16s%-16s%-21s%-16s\n",
                         "EPOCH", "DATE", "TIME", "SIGNAL");
                         headers_printed = true;
                     }
@@ -148,7 +148,7 @@ void* proximoth_cts_sniffer(void* arg){
                     strftime(formatted_t_date,21,"%Y/%m/%d",&broken_t);
                     strftime(formatted_t_time,21,"%X",&broken_t);
 
-                    fprintf(stdout,"%-16ld%-16s%-8s.%06ld     dBm %-16hhd\n", 
+                    fprintf(stdout,"%-16ld%-16s%-8s.%06ld      dBm %-16hhd\n", 
                         t,
                         formatted_t_date,
                         formatted_t_time,

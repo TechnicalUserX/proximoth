@@ -72,11 +72,11 @@ $ sudo proximoth -i wlan0 10:DA:41:E8:FA:DC -b 1C:CC:D6:00:00:00
 ```
 ## General Usage Information
 ```
-Usage: proximoth [flags] <target>
+Usage: proximoth [options] <target>
 
  <target>                            : MAC address of the target.
 
-flags:
+options:
 
  -h, --help                          : Prints this screen.
 

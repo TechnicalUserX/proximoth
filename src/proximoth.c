@@ -1,7 +1,7 @@
 #include <proximoth/proximoth.h>
 #include <proximoth/utility/config.h>
 #include <proximoth/utility/error.h>
-#include <proximoth/utility/threads.h>
+#include <proximoth/system/threads.h>
 
 int main(int argc, char* argv[]){
     

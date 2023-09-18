@@ -23,8 +23,6 @@ extern char proximoth_config_target_mac_string[PROXIMOTH_MAC_STRING_SIZE];
 
 extern FILE* proximoth_config_file_out;
 
-extern pcap_t* proximoth_config_interface_handle;
-
 extern char proximoth_config_error_buffer[256];
 
 struct proximoth_config_flags_t{
