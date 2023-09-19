@@ -1,9 +1,6 @@
 # Proximoth Makefile
 # Author: TechnicalUserX
 
-AUTHOR=TechnicalUserX
-EMAIL=technicaluserx@outlook.com
-
 # Project
 PROJECT=proximoth
 
@@ -11,7 +8,7 @@ PROJECT=proximoth
 VERSION_MAJOR=1
 VERSION_MINOR=0
 VERSION_PATCH=0
-VERSION_RELEASE=beta.3
+VERSION_RELEASE=beta.4
 
 ifneq ("${VERSION_RELEASE}","")
 VERSION=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_RELEASE}
@@ -35,6 +32,7 @@ SRC = $(shell find $(SRC_DIR) -type f -name "*.${SRC_EXT}")
 OBJ = $(patsubst $(SRC_DIR)/%, $(BUILD_OBJ_DIR)/%, $(SRC:.${SRC_EXT}=.${OBJ_EXT}))
 MAN_DIR=manpages
 IMG_DIR=images
+TEST_DIR=tests
 
 # Building
 BUILD_DIR=build

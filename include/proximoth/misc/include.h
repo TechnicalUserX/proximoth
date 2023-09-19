@@ -10,7 +10,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdatomic.h>
 #include <ctype.h>
 #include <sys/time.h>
 #include <sys/wait.h>
@@ -25,5 +24,11 @@
 #include <linux/wireless.h>
 #include <ifaddrs.h>
 #include <locale.h>
+
+#ifdef __cplusplus
+    #include <atomic>
+#else
+    #include <stdatomic.h>
+#endif
 
 #endif

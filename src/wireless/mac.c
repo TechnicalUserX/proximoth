@@ -1,8 +1,10 @@
 #include <proximoth/wireless/mac.h>
-#include <proximoth/utility/error.h>
-
 
 bool proximoth_mac_validate_mac_string(const char* mac_string){
+    if(mac_string == NULL){
+        return false;
+    }
+
     if((int)strlen(mac_string) != 17){
         return false;
     }

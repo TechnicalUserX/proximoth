@@ -9,8 +9,14 @@
     #error "This program is only intended for gcc and clang compilers"
 #endif
 
-#if __STDC_VERSION__ < 201112L
-    #error "Accepted minimum C standard is C11"
+#if !defined(__cplusplus)
+    #if __STDC_VERSION__ < 2011L
+        #error "Accepted minimum C standard is C11"
+    #endif
+#else
+    #if __cplusplus < 2011L
+        #error "Accepted minimum C++ standard is C++11"
+    #endif
 #endif
 
 #endif
