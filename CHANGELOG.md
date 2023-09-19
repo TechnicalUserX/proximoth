@@ -1,3 +1,7 @@
+# 1.0.0-beta.6
+ - Updated `.dockerignore`.
+ - Removed `DATE` from makefile.
+
 # 1.0.0-beta.5
  - Added miscellaneous images.
 
