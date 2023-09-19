@@ -1,4 +1,4 @@
-# Testing:
+# Testing
 
 Proximoth uses `GoogleTest` to test its functionality.
 

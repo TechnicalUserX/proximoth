@@ -1,5 +1,8 @@
+# 1.0.0-beta.5
+ - Added miscellaneous images.
+
 # 1.0.0-beta.4
- - Added testing functionality
+ - Added testing functionality.
 
 # 1.0.0-beta.3
  - Print help screen when no argument is given.
