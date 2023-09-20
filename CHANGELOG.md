@@ -1,3 +1,6 @@
+# 1.0.0-beta.7
+ - Removed unnecessary inclusion from `test-proximoth-001.cpp`.
+
 # 1.0.0-beta.6
  - Updated `.dockerignore`.
  - Removed `DATE` from makefile.

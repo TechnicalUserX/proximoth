@@ -3,7 +3,6 @@
 
 #include <gtest/gtest.h>
 #include <proximoth/wireless/mac.h>
-#include <proximoth/utility/error.h>
 
 TEST(proximoth_wireless,mac_validation){
 
