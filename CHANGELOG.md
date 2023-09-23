@@ -1,3 +1,6 @@
+# 1.0.0-beta.8
+ - Fix shebang location in `test-proximoth.sh`.
+
 # 1.0.0-beta.7
  - Removed unnecessary inclusion from `test-proximoth-001.cpp`.
 

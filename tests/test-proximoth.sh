@@ -1,6 +1,7 @@
+#!/bin/bash
+
 # Proximoth Test
 # Check Proximoth availability from terminal
-#!/bin/bash
 
 if [ ! -f ../build/bin/proximoth ]; then
     echo "Proximoth executable not found"
