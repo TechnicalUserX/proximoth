@@ -1,3 +1,6 @@
+# 1.0.0-beta.9
+ - Added `CONTRIBUTING.md` file.
+
 # 1.0.0-beta.8
  - Fix shebang location in `test-proximoth.sh`.
 
