@@ -1,3 +1,7 @@
+# 1.0.0-beta.10
+ - Fixed lack of inclusion of `netinet/in.h`.
+ - Added `printf()` compatibility with 32-bit systems.
+
 # 1.0.0-beta.9
  - Added `CONTRIBUTING.md` file.
 

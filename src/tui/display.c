@@ -135,7 +135,7 @@ void proximoth_display_panel_print_elapsed_time(void){
 
     if(w.ws_col > PROXIMOTH_DISPLAY_VIEW_WIDE_COLS && w.ws_row > PROXIMOTH_DISPLAY_VIEW_WIDE_ROWS){
         proximoth_display_set_cursor_position(11,27);
-        fprintf(stdout, COLOR RGB(250, 172, 187) "%lu" CLEAR,elapsed_time);
+        fprintf(stdout, COLOR RGB(250, 172, 187) "%"PRIu64 CLEAR,elapsed_time);
         proximoth_display_set_cursor_position(14,1);
         fflush(stdout);
     }
@@ -165,7 +165,7 @@ void proximoth_display_panel_print_parameters(void){
         fprintf(stdout, COLOR BOLD RGB(21, 138, 69) "%.6lf" CLEAR,proximoth_cts_catch_period);
         
         proximoth_display_set_cursor_position(6,64);
-        fprintf(stdout, COLOR BOLD RGB(48, 179, 102) "%lu" CLEAR,proximoth_cts_total_catched);
+        fprintf(stdout, COLOR BOLD RGB(48, 179, 102) "%"PRIu64  CLEAR,proximoth_cts_total_catched);
         
         proximoth_display_set_cursor_position(7,64);
         if(proximoth_cts_last_time.tv_sec != 0 && proximoth_cts_last_time.tv_usec != 0){
@@ -175,23 +175,23 @@ void proximoth_display_panel_print_parameters(void){
         }
 
         proximoth_display_set_cursor_position(9,27);
-        fprintf(stdout, COLOR BOLD RGB(245, 76, 107) "%lu" CLEAR,proximoth_rts_total_injected);
+        fprintf(stdout, COLOR BOLD RGB(245, 76, 107) "%"PRIu64 CLEAR,proximoth_rts_total_injected);
 
         proximoth_display_set_cursor_position(10,27);
-        fprintf(stdout, COLOR BOLD RGB(247, 119, 143) "%lu" CLEAR,proximoth_total_frames_catched);
+        fprintf(stdout, COLOR BOLD RGB(247, 119, 143) "%"PRIu64 CLEAR,proximoth_total_frames_catched);
 
         proximoth_display_set_cursor_position(11,69);
         fprintf(stdout, "               ");
         proximoth_display_set_cursor_position(11,69);
 
         if(proximoth_cts_last_signal_strength < -90){
-            fprintf(stdout, COLOR RGB(255,0,0)   "▂___ dBm (%hhd)" CLEAR, proximoth_cts_last_signal_strength);
+            fprintf(stdout, COLOR RGB(255,0,0)   "▂___ dBm (%"PRId8")" CLEAR, proximoth_cts_last_signal_strength);
         }else if(proximoth_cts_last_signal_strength < -60){
-            fprintf(stdout, COLOR RGB(255,100,0) "▂▄__ dBm (%hhd)" CLEAR, proximoth_cts_last_signal_strength);
+            fprintf(stdout, COLOR RGB(255,100,0) "▂▄__ dBm (%"PRId8")" CLEAR, proximoth_cts_last_signal_strength);
         }else if(proximoth_cts_last_signal_strength < -30){
-            fprintf(stdout, COLOR RGB(255,255,0) "▂▄▆_ dBm (%hhd)" CLEAR, proximoth_cts_last_signal_strength);
+            fprintf(stdout, COLOR RGB(255,255,0) "▂▄▆_ dBm (%"PRId8")" CLEAR, proximoth_cts_last_signal_strength);
         }else{
-            fprintf(stdout, COLOR RGB(0,255,0)   "▂▄▆█ dBm (%hhd)" CLEAR, proximoth_cts_last_signal_strength);
+            fprintf(stdout, COLOR RGB(0,255,0)   "▂▄▆█ dBm (%"PRId8")" CLEAR, proximoth_cts_last_signal_strength);
         }
 
         proximoth_display_set_cursor_position(3,11);
@@ -206,26 +206,26 @@ void proximoth_display_panel_print_parameters(void){
     }else if(w.ws_col > PROXIMOTH_DISPLAY_VIEW_NARROW_COLS && w.ws_row > PROXIMOTH_DISPLAY_VIEW_NARROW_ROWS){
 
         proximoth_display_set_cursor_position(9,9);
-        fprintf(stdout, COLOR BOLD RGB(48, 179, 102) "%lu" CLEAR,proximoth_cts_total_catched);
+        fprintf(stdout, COLOR BOLD RGB(48, 179, 102) "%"PRIu64 CLEAR,proximoth_cts_total_catched);
         
         proximoth_display_set_cursor_position(7,15);
         fprintf(stdout, COLOR BOLD RGB(102, 255, 165) "%02d:%02d:%02d" CLEAR,h,m,s);
 
         proximoth_display_set_cursor_position(8,9);
-        fprintf(stdout, COLOR BOLD RGB(245, 76, 107) "%lu" CLEAR,proximoth_rts_total_injected);
+        fprintf(stdout, COLOR BOLD RGB(245, 76, 107) "%"PRIu64 CLEAR,proximoth_rts_total_injected);
 
         proximoth_display_set_cursor_position(6,12);
         fprintf(stdout, "                 ");
         proximoth_display_set_cursor_position(6,12);
 
         if(proximoth_cts_last_signal_strength < -90){
-            fprintf(stdout, COLOR RGB(255,0,0)   "dBm (%hhd)" CLEAR, proximoth_cts_last_signal_strength);
+            fprintf(stdout, COLOR RGB(255,0,0)   "dBm (%"PRId8")" CLEAR, proximoth_cts_last_signal_strength);
         }else if(proximoth_cts_last_signal_strength < -60){
-            fprintf(stdout, COLOR RGB(255,100,0) "dBm (%hhd)" CLEAR, proximoth_cts_last_signal_strength);
+            fprintf(stdout, COLOR RGB(255,100,0) "dBm (%"PRId8")" CLEAR, proximoth_cts_last_signal_strength);
         }else if(proximoth_cts_last_signal_strength < -30){
-            fprintf(stdout, COLOR RGB(255,255,0) "dBm (%hhd)" CLEAR, proximoth_cts_last_signal_strength);
+            fprintf(stdout, COLOR RGB(255,255,0) "dBm (%"PRId8")" CLEAR, proximoth_cts_last_signal_strength);
         }else{
-            fprintf(stdout, COLOR RGB(0,255,0)   "dBm (%hhd)" CLEAR, proximoth_cts_last_signal_strength);
+            fprintf(stdout, COLOR RGB(0,255,0)   "dBm (%"PRId8")" CLEAR, proximoth_cts_last_signal_strength);
         }
 
         proximoth_display_set_cursor_position(3,4);

@@ -24,6 +24,8 @@
 #include <linux/wireless.h>
 #include <ifaddrs.h>
 #include <locale.h>
+#include <netinet/in.h>
+#include <inttypes.h>
 
 #ifdef __cplusplus
     #include <atomic>

@@ -47,6 +47,6 @@ void proximoth_mac_generate_random_mac(proximoth_mac_t mac){
 }
 
 void proximoth_mac_convert_mac_to_string(const proximoth_mac_t mac, proximoth_mac_string_t mac_string){
-        snprintf(mac_string,PROXIMOTH_MAC_STRING_SIZE,"%02hhX:%02hhX:%02hhX:%02hhX:%02hhX:%02hhX",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
+        snprintf(mac_string,PROXIMOTH_MAC_STRING_SIZE,"%02"PRIX8":%02"PRIX8":%02"PRIX8":%02"PRIX8":%02"PRIX8":%02"PRIX8,mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
         mac_string[PROXIMOTH_MAC_STRING_SIZE-1] = '\0'; // Just to make sure...
 }

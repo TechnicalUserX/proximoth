@@ -1,3 +1,4 @@
+#include <proximoth/utility/config.h>
 #include <proximoth/wireless/mac.h>
 #include <proximoth/wireless/interface.h>
 #include <proximoth/wireless/radiotap.h>
@@ -5,7 +6,6 @@
 #include <proximoth/wireless/rts_injector.h>
 #include <proximoth/tui/display.h>
 #include <proximoth/system/signal.h>
-#include <proximoth/utility/config.h>
 #include <proximoth/utility/error.h>
 #include <proximoth/version/version.h>
 
@@ -391,7 +391,7 @@ void proximoth_config(int argc, char* argv[]){
             "Target MAC      : %s\n"
             "Interface       : %s (Channel: %d)\n"
             "Start Time      : %s\n"
-            "GMT Offset      : %ld seconds\n\n"
+            "GMT Offset      : %"PRId64" seconds\n\n"
             "Listening for CTS...\n",
             PROXIMOTH_VERSION,
             proximoth_config_bssid_mac_string,
@@ -399,7 +399,7 @@ void proximoth_config(int argc, char* argv[]){
             proximoth_interface_name,
             proximoth_interface_channel,
             formatted_start_time,
-            broken_start_time.tm_gmtoff);
+            (int64_t)broken_start_time.tm_gmtoff);
 
         fflush(proximoth_config_file_out);
     }
@@ -416,7 +416,7 @@ void proximoth_config(int argc, char* argv[]){
             "Target MAC      : %s\n"
             "Interface       : %s (Channel: %d)\n"
             "Start Time      : %s\n"
-            "GMT Offset      : %ld seconds\n\n"
+            "GMT Offset      : %"PRId64" seconds\n\n"
             "Listening for CTS...\n",
             PROXIMOTH_VERSION,
             proximoth_config_bssid_mac_string,
@@ -424,7 +424,7 @@ void proximoth_config(int argc, char* argv[]){
             proximoth_interface_name,
             proximoth_interface_channel,
             formatted_start_time,
-            broken_start_time.tm_gmtoff);
+            (int64_t)broken_start_time.tm_gmtoff);
 
         fflush(stdout);
     }else{
@@ -472,14 +472,14 @@ void proximoth_config_reset(void){
         suseconds_t t_u_diff = t % 1000000;
         
         fprintf(proximoth_config_file_out, 
-            "\nTotal Frames Catched  : %lu\n"
-            "Total RTS Injected    : %lu\n"
-            "Total CTS Catched     : %lu\n"
-            "Time Elapsed          : %ld.%ld seconds\n",
+            "\nTotal Frames Catched  : %"PRIu64"\n"
+            "Total RTS Injected    : %"PRIu64"\n"
+            "Total CTS Catched     : %"PRIu64"\n"
+            "Time Elapsed          : %"PRId64".%"PRId64" seconds\n",
             proximoth_total_frames_catched,
             proximoth_rts_total_injected,
             proximoth_cts_total_catched,
-            t_diff, t_u_diff);
+            (int64_t)t_diff, (int64_t)t_u_diff);
 
         time_t epoch = proximoth_cts_last_time.tv_sec;
         if(epoch == 0){
@@ -510,14 +510,14 @@ void proximoth_config_reset(void){
         suseconds_t t_u_diff = t % 1000000;
 
         fprintf(stdout, 
-            "\nTotal Frames Catched  : %lu\n"
-            "Total RTS Injected    : %lu\n"
-            "Total CTS Catched     : %lu\n"
-            "Time Elapsed          : %ld.%ld seconds\n",
+            "\nTotal Frames Catched  : %"PRIu64"\n"
+            "Total RTS Injected    : %"PRIu64"\n"
+            "Total CTS Catched     : %"PRIu64"\n"
+            "Time Elapsed          : %"PRId64".%"PRId64" seconds\n",
             proximoth_total_frames_catched,
             proximoth_rts_total_injected,
             proximoth_cts_total_catched,
-            t_diff, t_u_diff);
+            (int64_t)t_diff, (int64_t)t_u_diff);
 
         time_t epoch = proximoth_cts_last_time.tv_sec;
         if(epoch == 0){

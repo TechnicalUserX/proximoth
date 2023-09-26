@@ -113,11 +113,11 @@ void* proximoth_cts_sniffer(void* arg){
                     strftime(formatted_t_date,21,"%Y/%m/%d",&broken_t);
                     strftime(formatted_t_time,21,"%X",&broken_t);
 
-                    fprintf(proximoth_config_file_out,"%-16ld%-16s%-8s.%06ld      dBm %-16hhd\n", 
-                        t,
+                    fprintf(proximoth_config_file_out,"%-16"PRId64"%-16s%-8s.%06"PRId64"      dBm %-16"PRId8"\n", 
+                        (int64_t)t,
                         formatted_t_date,
                         formatted_t_time,
-                        t_m,
+                        (int64_t)t_m,
                         proximoth_cts_last_signal_strength
                     );
                     fflush(proximoth_config_file_out);
@@ -148,11 +148,11 @@ void* proximoth_cts_sniffer(void* arg){
                     strftime(formatted_t_date,21,"%Y/%m/%d",&broken_t);
                     strftime(formatted_t_time,21,"%X",&broken_t);
 
-                    fprintf(stdout,"%-16ld%-16s%-8s.%06ld      dBm %-16hhd\n", 
-                        t,
+                    fprintf(stdout,"%-16"PRId64"%-16s%-8s.%06"PRId64"      dBm %-16"PRId8"\n", 
+                        (int64_t)t,
                         formatted_t_date,
                         formatted_t_time,
-                        t_m,
+                        (int64_t)t_m,
                         proximoth_cts_last_signal_strength
                     );
                     fflush(stdout);
