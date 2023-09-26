@@ -1,3 +1,6 @@
+# 1.0.0-beta.15
+ - Visual fixes.
+
 # 1.0.0-beta.14
  - Visual fixes.
 

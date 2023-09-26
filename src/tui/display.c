@@ -103,7 +103,7 @@ void proximoth_display_panel_print_constants(void){
         fprintf(stdout, COLOR BOLD RGB(123, 174, 212) "%s" CLEAR,proximoth_config_target_mac_string);
 
         proximoth_display_set_cursor_position(7,16);
-        fprintf(stdout, COLOR BOLD RGB(184, 225, 255) "%s" CLEAR COLOR BOLD RGB(184, 225, 255) "(Ch: %d)" CLEAR,proximoth_interface_name,proximoth_interface_channel);
+        fprintf(stdout, COLOR BOLD RGB(184, 225, 255) "%s" CLEAR COLOR BOLD RGB(184, 225, 255) " (Ch: %d)" CLEAR,proximoth_interface_name,proximoth_interface_channel);
     
     }else if(w.ws_col > PROXIMOTH_DISPLAY_VIEW_NARROW_COLS && w.ws_row > PROXIMOTH_DISPLAY_VIEW_NARROW_ROWS){
     
