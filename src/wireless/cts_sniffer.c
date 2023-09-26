@@ -111,7 +111,7 @@ void* proximoth_cts_sniffer(void* arg){
                     char formatted_t_time[32] = {0};
 
                     strftime(formatted_t_date,21,"%Y/%m/%d",&broken_t);
-                    strftime(formatted_t_time,21,"%X",&broken_t);
+                    strftime(formatted_t_time,21,"%T",&broken_t);
 
                     fprintf(proximoth_config_file_out,"%-16"PRId64"%-16s%-8s.%06"PRId64"      dBm %-16"PRId8"\n", 
                         (int64_t)t,
@@ -146,7 +146,7 @@ void* proximoth_cts_sniffer(void* arg){
                     char formatted_t_time[32] = {0};
 
                     strftime(formatted_t_date,21,"%Y/%m/%d",&broken_t);
-                    strftime(formatted_t_time,21,"%X",&broken_t);
+                    strftime(formatted_t_time,21,"%T",&broken_t);
 
                     fprintf(stdout,"%-16"PRId64"%-16s%-8s.%06"PRId64"      dBm %-16"PRId8"\n", 
                         (int64_t)t,

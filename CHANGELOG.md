@@ -1,3 +1,6 @@
+# 1.0.0-beta.12
+ - Fixed time representation in `--text-mode` and output format.
+
 # 1.0.0-beta.11
  - Fixed `-pthread` location in makefile.
  - Renamed `LIB` to `LDFLAGS` in makefile.
