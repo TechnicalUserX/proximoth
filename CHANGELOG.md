@@ -1,3 +1,7 @@
+# 1.0.0-beta.11
+ - Fixed `-pthread` location in makefile.
+ - Renamed `LIB` to `LDFLAGS` in makefile.
+
 # 1.0.0-beta.10
  - Fixed lack of inclusion of `netinet/in.h`.
  - Added `printf()` compatibility with 32-bit systems.

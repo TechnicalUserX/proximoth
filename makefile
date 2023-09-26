@@ -8,7 +8,7 @@ PROJECT=proximoth
 VERSION_MAJOR=1
 VERSION_MINOR=0
 VERSION_PATCH=0
-VERSION_RELEASE=beta.10
+VERSION_RELEASE=beta.11
 
 ifneq ("${VERSION_RELEASE}","")
 VERSION=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_RELEASE}
@@ -49,8 +49,8 @@ INSTALL_DOC_DIR=/usr/local/share/doc/${PROJECT}
 
 # Compilation
 CC=gcc
-CFLAGS=-Wall -Werror -Wpedantic -pthread -std=c11 -I${HDR_DIR} -I${BUILD_HDR_DIR}
-LIB=-lpcap -lm
+CFLAGS=-Wall -Werror -Wpedantic -std=c11 -I${HDR_DIR} -I${BUILD_HDR_DIR}
+LDFLAGS=-lpcap -lm -pthread
 
 # Version Header
 VERSION_HDR=${BUILD_HDR_DIR}/${PROJECT}/version/version.${HDR_EXT}
@@ -59,7 +59,7 @@ VERSION_HDR=${BUILD_HDR_DIR}/${PROJECT}/version/version.${HDR_EXT}
 # Recipies
 ${PROJECT}: ${VERSION_HDR} ${OBJ} ${MAN_PAGE}
 	@$(shell if ! [ -d ${BUILD_BIN_DIR} ]; then ${MKDIR_P} ${BUILD_BIN_DIR}; fi)
-	@${CC} ${FLAGS} ${OBJ} ${LIB} -o ${BUILD_BIN_DIR}/${PROJECT}
+	@${CC} ${FLAGS} ${OBJ} ${LDFLAGS} -o ${BUILD_BIN_DIR}/${PROJECT}
 
 ${BUILD_OBJ_DIR}/%.${OBJ_EXT}: ${SRC_DIR}/%.${SRC_EXT}
 	@$(shell if ! [ -d $(dir $@) ]; then ${MKDIR_P} $(dir $@); fi)
