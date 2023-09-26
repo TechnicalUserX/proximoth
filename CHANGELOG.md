@@ -1,3 +1,6 @@
+# 1.0.0-beta.14
+ - Visual fixes.
+
 # 1.0.0-beta.13
  - Changed Dockerfile image version
  - Modified makefile to obey PROXIMOTH_DOCKER variable
