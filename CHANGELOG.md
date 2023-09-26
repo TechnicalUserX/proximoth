@@ -1,3 +1,7 @@
+# 1.0.0-beta.13
+ - Changed Dockerfile image version
+ - Modified makefile to obey PROXIMOTH_DOCKER variable
+
 # 1.0.0-beta.12
  - Fixed time representation in `--text-mode` and output format.
 

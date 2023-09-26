@@ -1,7 +1,8 @@
 # Proximoth Docker File
-ARG OS_VERSION=latest
+ARG OS_VERSION=bookworm-slim
 ARG OS=debian
 FROM ${OS}:${OS_VERSION}
+ENV PROXIMOTH_DOCKER=true
 SHELL ["/bin/bash", "-c"]
 RUN apt update
 RUN apt install -y libpcap-dev

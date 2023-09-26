@@ -8,7 +8,7 @@ PROJECT=proximoth
 VERSION_MAJOR=1
 VERSION_MINOR=0
 VERSION_PATCH=0
-VERSION_RELEASE=beta.12
+VERSION_RELEASE=beta.13
 
 ifneq ("${VERSION_RELEASE}","")
 VERSION=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_RELEASE}
@@ -76,11 +76,13 @@ ${VERSION_HDR}:
 
 
 ${MAN_PAGE}:
+ifneq (${PROXIMOTH_DOCKER},true)
 	$(shell if ! [ -d ${BUILD_MAN_DIR} ]; then ${MKDIR_P} ${BUILD_MAN_DIR}; fi)
 	@sed 	-e 's/@PROXIMOTH_VERSION@/${VERSION}/g' \
 	 		-e 's#@PROXIMOTH_DATE@#${DATE}#g' \
 	  		${MAN_DIR}/${PROJECT}.${MAN_SEC}.in > $@
 	@gzip -k ${BUILD_MAN_DIR}/${PROJECT}.${MAN_SEC}
+endif
 
 build: ${PROJECT}
 
@@ -89,11 +91,15 @@ clean:
 
 install: 
 	@install -D ${BUILD_BIN_DIR}/${PROJECT} --target-directory ${INSTALL_BIN_DIR}
+ifneq (${PROXIMOTH_DOCKER},true)
 	@install -D ${BUILD_MAN_DIR}/${PROJECT}.${MAN_SEC}.gz --target-directory ${INSTALL_MAN_DIR}
 	@install -D ${IMG_DIR}/* --target-directory ${INSTALL_DOC_DIR}/${IMG_DIR}
 	@install -D LICENSE --target-directory ${INSTALL_DOC_DIR}
+endif
 
 uninstall:
 	@rm -f ${INSTALL_BIN_DIR}/${PROJECT}
+ifneq (${PROXIMOTH_DOCKER},true)
 	@rm -f ${INSTALL_MAN_DIR}/${PROJECT}.${MAN_SEC}.gz
 	@rm -rf ${INSTALL_DOC_DIR}
+endif
