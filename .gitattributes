@@ -1,3 +1,4 @@
 *.h linguist-language=C
 *.c linguist-language=C
 *.h.in linguist-language=C
+*.sh linguist-language=Shell

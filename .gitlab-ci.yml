@@ -4,16 +4,18 @@ variables:
   PROJECT: proximoth
   AUTHOR: technicaluserx
   DOCKER_PLATFORMS: linux/amd64,linux/arm/v7,linux/arm64/v8
+  TEST_IMAGE: debian:bookworm-slim
 
 stages:
   - Test
   - Build
 
-GoogleTest AMD64:
+GTest AMD64:
   stage: Test
-  image: amd64/debian:bookworm-slim
+  image: amd64/$TEST_IMAGE
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
   before_script:
     - apt update -y
     - apt install g++ -y
@@ -25,11 +27,12 @@ GoogleTest AMD64:
     - make
     - make test
 
-GoogleTest ARM32v7:
+GTest ARM32v7:
   stage: Test
-  image: arm32v7/debian:bookworm-slim
+  image: arm32v7/$TEST_IMAGE
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
   before_script:
     - apt update -y
     - apt install g++ -y
@@ -41,11 +44,12 @@ GoogleTest ARM32v7:
     - make
     - make test
 
-GoogleTest ARM64v8:
+GTest ARM64v8:
   stage: Test
-  image: arm64v8/debian:bookworm-slim
+  image: arm64v8/$TEST_IMAGE
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
   before_script:
     - apt update -y
     - apt install g++ -y
@@ -57,11 +61,12 @@ GoogleTest ARM64v8:
     - make
     - make test
 
-Compilation AMD64:
+Compile AMD64:
   stage: Test
-  image: amd64/debian:bookworm-slim
+  image: amd64/$TEST_IMAGE
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
   before_script:
     - apt update -y
     - apt install gcc -y
@@ -74,11 +79,12 @@ Compilation AMD64:
     - chmod +x test-proximoth.sh
     - ./test-proximoth.sh
 
-Compilation ARM32v7:
+Compile ARM32v7:
   stage: Test
-  image: arm32v7/debian:bookworm-slim
+  image: arm32v7/$TEST_IMAGE
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
   before_script:
     - apt update -y
     - apt install gcc -y
@@ -91,11 +97,12 @@ Compilation ARM32v7:
     - chmod +x test-proximoth.sh
     - ./test-proximoth.sh
 
-Compilation ARM64v8:
+Compile ARM64v8:
   stage: Test
-  image: arm32v7/debian:bookworm-slim
+  image: arm32v7/$TEST_IMAGE
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
   before_script:
     - apt update -y
     - apt install gcc -y
@@ -115,7 +122,6 @@ Docker Image:
     - docker:24.0-dind
   rules:
     - if: $CI_COMMIT_TAG != null && $CI_PIPELINE_SOURCE == "push"
-      when: manual
   before_script:
     - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
   script:

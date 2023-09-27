@@ -1,3 +1,6 @@
+# 1.0.0-beta.17
+ - CI/CD amendments.
+
 # 1.0.0-beta.16
  - Added CI/CD
 
