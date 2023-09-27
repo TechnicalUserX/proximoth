@@ -1,0 +1,124 @@
+# Proximoth CI/CD By TechnicalUserX
+
+variables:
+  PROJECT: proximoth
+  AUTHOR: technicaluserx
+  DOCKER_PLATFORMS: linux/amd64,linux/arm/v7,linux/arm64/v8
+
+stages:
+  - Test
+  - Build
+
+GoogleTest AMD64:
+  stage: Test
+  image: amd64/debian:bookworm-slim
+  rules:
+    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+  before_script:
+    - apt update
+    - apt install gcc
+    - apt install make
+    - apt install libgtest-dev
+    - apt install libpcap-dev
+  script:
+    - cd tests
+    - make
+    - make test
+
+GoogleTest ARM32v7:
+  stage: Test
+  image: arm32v7/debian:bookworm-slim
+  rules:
+    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+  before_script:
+    - apt update
+    - apt install gcc
+    - apt install make
+    - apt install libgtest-dev
+    - apt install libpcap-dev
+  script:
+    - cd tests
+    - make
+    - make test
+
+GoogleTest ARM64v8:
+  stage: Test
+  image: arm64v8/debian:bookworm-slim
+  rules:
+    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+  before_script:
+    - apt update
+    - apt install gcc
+    - apt install make
+    - apt install libgtest-dev
+    - apt install libpcap-dev
+  script:
+    - cd tests
+    - make
+    - make test
+
+Compilation AMD64:
+  stage: Test
+  image: amd64/debian:bokworm-slim
+  rules:
+    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+  before_script:
+    - apt update
+    - apt install gcc
+    - apt install make
+    - apt install libpcap-dev
+  script:
+    - make
+    - make install
+    - cd tests
+    - chmod +x test-proximoth.sh
+    - ./test-proximoth.sh
+
+Compilation ARM32v7:
+  stage: Test
+  image: arm32v7/debian:bokworm-slim
+  rules:
+    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+  before_script:
+    - apt update
+    - apt install gcc
+    - apt install make
+    - apt install libpcap-dev
+  script:
+    - make
+    - make install
+    - cd tests
+    - chmod +x test-proximoth.sh
+    - ./test-proximoth.sh
+
+Compilation ARM64v8:
+  stage: Test
+  image: arm32v7/debian:bokworm-slim
+  rules:
+    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+  before_script:
+    - apt update
+    - apt install gcc
+    - apt install make
+    - apt install libpcap-dev
+  script:
+    - make
+    - make install
+    - cd tests
+    - chmod +x test-proximoth.sh
+    - ./test-proximoth.sh
+
+Docker Image:
+  stage: Build
+  image: docker:24.0
+  services:
+    - docker:24.0-dind
+  rules:
+    - if: ${CI_COMMIT_TAG} != null && ${CI_PIPELINE_SOURCE} == "push"
+      when: manual
+  before_script:
+    - docker login -u ${DOCKER_USER} -p ${DOCKER_TOKEN}
+  script:
+    - docker buildx create --name multiarch
+    - docker buildx use multiarch
+    - docker buildx build -t ${AUTHOR}/${PROJECT}:${CI_COMMIT_TAG} --platform=${DOCKER_PLATFORMS} .

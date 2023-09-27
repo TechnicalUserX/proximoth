@@ -8,8 +8,7 @@ if [ ! -f ../build/bin/proximoth ]; then
     exit 1
 fi
 
-cd ../build/bin
-./proximoth
+proximoth
 
 return_code=$?
 

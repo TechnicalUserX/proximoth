@@ -1,3 +1,6 @@
+# 1.0.0-beta.16
+ - Added CI/CD
+
 # 1.0.0-beta.15
  - Visual fixes.
 
