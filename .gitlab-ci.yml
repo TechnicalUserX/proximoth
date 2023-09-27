@@ -127,6 +127,8 @@ Docker Image:
   before_script:
     - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
   script:
-    - docker buildx create --name multiarch
-    - docker buildx use multiarch
+    - docker context create multiarch_context
+    - docker context use multiarch_context
+    - docker buildx create --name multiarch_builder
+    - docker buildx use multiarch_builder
     - docker buildx build -t $AUTHOR/$PROJECT:$CI_COMMIT_TAG --platform=$DOCKER_PLATFORMS .

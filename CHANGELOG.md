@@ -1,3 +1,6 @@
+# 1.0.0-beta.19
+ - CI/CD fix.
+
 # 1.0.0-beta.18
  - CI/CD fix.
 
