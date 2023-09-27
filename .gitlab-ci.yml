@@ -13,7 +13,7 @@ GoogleTest AMD64:
   stage: Test
   image: amd64/debian:bookworm-slim
   rules:
-    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+    - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
   before_script:
     - apt update
     - apt install gcc
@@ -29,7 +29,7 @@ GoogleTest ARM32v7:
   stage: Test
   image: arm32v7/debian:bookworm-slim
   rules:
-    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+    - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
   before_script:
     - apt update
     - apt install gcc
@@ -45,7 +45,7 @@ GoogleTest ARM64v8:
   stage: Test
   image: arm64v8/debian:bookworm-slim
   rules:
-    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+    - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
   before_script:
     - apt update
     - apt install gcc
@@ -61,7 +61,7 @@ Compilation AMD64:
   stage: Test
   image: amd64/debian:bokworm-slim
   rules:
-    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+    - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
   before_script:
     - apt update
     - apt install gcc
@@ -78,7 +78,7 @@ Compilation ARM32v7:
   stage: Test
   image: arm32v7/debian:bokworm-slim
   rules:
-    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+    - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
   before_script:
     - apt update
     - apt install gcc
@@ -95,7 +95,7 @@ Compilation ARM64v8:
   stage: Test
   image: arm32v7/debian:bokworm-slim
   rules:
-    - if: ${CI_COMMIT_BRANCH} != null && ${CI_COMMIT_TAG} == null && ${CI_PIPELINE_SOURCE} == "push"
+    - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
   before_script:
     - apt update
     - apt install gcc
