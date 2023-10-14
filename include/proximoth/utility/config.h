@@ -50,4 +50,6 @@ void proximoth_config(int argc, char* argv[]);
 
 void proximoth_config_reset(void);
 
+void proximoth_exit(void);
+
 #endif

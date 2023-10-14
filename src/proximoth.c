@@ -1,3 +1,8 @@
+/**
+ * Proximoth - Control Frame Attack Vulnerability Detection Tool
+ * Written By TechnicalUserX
+ */
+
 #include <proximoth/proximoth.h>
 #include <proximoth/utility/config.h>
 #include <proximoth/utility/error.h>
@@ -11,5 +16,5 @@ int main(int argc, char* argv[]){
     
     proximoth_threads_wait();
     
-    exit((int)PROXIMOTH_SUCCESS);
+    proximoth_exit();
 }

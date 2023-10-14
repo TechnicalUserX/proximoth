@@ -30,7 +30,6 @@ double proximoth_interface_convert_freq_to_float(struct iw_freq* frequency){
 
 int proximoth_interface_get_state(char* interface_name, proximoth_interface_state_t* state){
 
-
     struct ifreq ifr;
 
     strncpy(ifr.ifr_name,interface_name,IFNAMSIZ);

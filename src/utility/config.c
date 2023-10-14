@@ -84,7 +84,6 @@ void proximoth_config(int argc, char* argv[]){
         exit((int)PROXIMOTH_ERROR_ATEXIT);
     }
 
-
     static const struct option long_options[] = {
         { "help",           no_argument,        NULL,   'h'},    
         { "interface",      required_argument,  NULL,   'i'},
@@ -391,7 +390,7 @@ void proximoth_config(int argc, char* argv[]){
             "Target MAC      : %s\n"
             "Interface       : %s (Channel: %d)\n"
             "Start Time      : %s\n"
-            "GMT Offset      : %"PRId64" seconds\n\n"
+            "GMT Offset      : %" PRId64 " seconds\n\n"
             "Listening for CTS...\n",
             PROXIMOTH_VERSION,
             proximoth_config_bssid_mac_string,
@@ -416,7 +415,7 @@ void proximoth_config(int argc, char* argv[]){
             "Target MAC      : %s\n"
             "Interface       : %s (Channel: %d)\n"
             "Start Time      : %s\n"
-            "GMT Offset      : %"PRId64" seconds\n\n"
+            "GMT Offset      : %" PRId64 " seconds\n\n"
             "Listening for CTS...\n",
             PROXIMOTH_VERSION,
             proximoth_config_bssid_mac_string,
@@ -472,10 +471,10 @@ void proximoth_config_reset(void){
         suseconds_t t_u_diff = t % 1000000;
         
         fprintf(proximoth_config_file_out, 
-            "\nTotal Frames Catched  : %"PRIu64"\n"
-            "Total RTS Injected    : %"PRIu64"\n"
-            "Total CTS Catched     : %"PRIu64"\n"
-            "Time Elapsed          : %"PRId64".%"PRId64" seconds\n",
+            "\nTotal Frames Catched  : %" PRIu64 "\n"
+            "Total RTS Injected    : %" PRIu64 "\n"
+            "Total CTS Catched     : %" PRIu64 "\n"
+            "Time Elapsed          : %" PRId64 ".%" PRId64 " seconds\n",
             proximoth_total_frames_catched,
             proximoth_rts_total_injected,
             proximoth_cts_total_catched,
@@ -510,10 +509,10 @@ void proximoth_config_reset(void){
         suseconds_t t_u_diff = t % 1000000;
 
         fprintf(stdout, 
-            "\nTotal Frames Catched  : %"PRIu64"\n"
-            "Total RTS Injected    : %"PRIu64"\n"
-            "Total CTS Catched     : %"PRIu64"\n"
-            "Time Elapsed          : %"PRId64".%"PRId64" seconds\n",
+            "\nTotal Frames Catched  : %" PRIu64 "\n"
+            "Total RTS Injected    : %" PRIu64 "\n"
+            "Total CTS Catched     : %" PRIu64 "\n"
+            "Time Elapsed          : %" PRId64 ".%" PRId64 " seconds\n",
             proximoth_total_frames_catched,
             proximoth_rts_total_injected,
             proximoth_cts_total_catched,
@@ -550,4 +549,9 @@ void proximoth_config_reset(void){
         fflush(stderr);
     }
 
+}
+
+void proximoth_exit(void){
+    proximoth_error = PROXIMOTH_SUCCESS;
+    exit((int)PROXIMOTH_SUCCESS);
 }

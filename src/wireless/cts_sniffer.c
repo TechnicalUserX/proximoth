@@ -28,7 +28,6 @@ void* proximoth_cts_sniffer(void* arg){
     struct pcap_pkthdr* hdr = NULL;
     const byte_t* data = NULL;
 
-
     while(1){
 
         if(proximoth_cts_sniffer_thread_shutdown_request){
@@ -113,7 +112,7 @@ void* proximoth_cts_sniffer(void* arg){
                     strftime(formatted_t_date,21,"%Y/%m/%d",&broken_t);
                     strftime(formatted_t_time,21,"%T",&broken_t);
 
-                    fprintf(proximoth_config_file_out,"%-16"PRId64"%-16s%-8s.%06"PRId64"      dBm %-16"PRId8"\n", 
+                    fprintf(proximoth_config_file_out,"%-16" PRId64 "%-16s%-8s.%-12" PRId64 "dBm %-16" PRId8 "\n", 
                         (int64_t)t,
                         formatted_t_date,
                         formatted_t_time,
@@ -122,7 +121,6 @@ void* proximoth_cts_sniffer(void* arg){
                     );
                     fflush(proximoth_config_file_out);
                 }
-
 
                 if(proximoth_config_flags.t){
                     static bool headers_printed = false;
@@ -148,7 +146,7 @@ void* proximoth_cts_sniffer(void* arg){
                     strftime(formatted_t_date,21,"%Y/%m/%d",&broken_t);
                     strftime(formatted_t_time,21,"%T",&broken_t);
 
-                    fprintf(stdout,"%-16"PRId64"%-16s%-8s.%06"PRId64"      dBm %-16"PRId8"\n", 
+                    fprintf(stdout,"%-16" PRId64 "%-16s%-8s.%-12" PRId64 "dBm %-16" PRId8 "\n", 
                         (int64_t)t,
                         formatted_t_date,
                         formatted_t_time,
@@ -157,7 +155,6 @@ void* proximoth_cts_sniffer(void* arg){
                     );
                     fflush(stdout);
                 }
-
 
                 proximoth_cts_last_time = current_time;
                 
