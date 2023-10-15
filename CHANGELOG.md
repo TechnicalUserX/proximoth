@@ -1,8 +1,12 @@
+# 1.0.0-beta.24
+ - Added website CI/CD.
+ - Changed the manpage location to `docs`.
+
 # 1.0.0-beta.23
- - Fixed DATE variable in makefile
+ - Fixed DATE variable in makefile.
  - Various amendments to program flow.
  - Fixed PRI macros.
- - Changed text-mode and out-file formatting code
+ - Changed text-mode and out-file formatting code.
 
 # 1.0.0-beta.22
  - CI/CD fix.

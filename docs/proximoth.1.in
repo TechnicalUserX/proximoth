@@ -14,7 +14,7 @@
 
 .SH DESCRIPTION
 .P
-Proximoth is a command line tool to detect \fBproximal privacy violation vulnerability\fR in wireless chipsets with
+Proximoth is a command-line tool to detect \fBproximal privacy violation vulnerability\fR in wireless chipsets with
 \fBControl Frame Attack\fR. This vulnerability lets an attacker detect the presence of the Wi-Fi device within range
 by using the global MAC address of it. Proximoth basically replicates this attack to achieve this goal.
 .P

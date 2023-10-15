@@ -8,12 +8,12 @@ PROJECT=proximoth
 VERSION_MAJOR=1
 VERSION_MINOR=0
 VERSION_PATCH=0
-VERSION_RELEASE=beta.23
+VERSION_RELEASE=beta.24
 
 # Date
-DATE=14/10/2023
+DATE=15/10/2023
 
-ifneq ("${VERSION_RELEASE}","")
+ifneq ("${VERSION_RELEASE}","stable")
 VERSION=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}-${VERSION_RELEASE}
 else
 VERSION=${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}
@@ -30,7 +30,7 @@ SRC_DIR=src
 HDR_DIR=include
 SRC = $(shell find $(SRC_DIR) -type f -name "*.${SRC_EXT}")
 OBJ = $(patsubst $(SRC_DIR)/%, $(BUILD_OBJ_DIR)/%, $(SRC:.${SRC_EXT}=.${OBJ_EXT}))
-MAN_DIR=manpages
+MAN_DIR=docs
 IMG_DIR=images
 TEST_DIR=tests
 
@@ -39,16 +39,22 @@ BUILD_DIR=build
 BUILD_OBJ_DIR=${BUILD_DIR}/obj
 BUILD_BIN_DIR=${BUILD_DIR}/bin
 BUILD_HDR_DIR=${BUILD_DIR}/include
-BUILD_MAN_DIR=${BUILD_DIR}/manpages
+BUILD_MAN_DIR=${BUILD_DIR}/docs
 
 # Manual Pages
 MAN_SEC=1
 MAN_PAGE=${BUILD_MAN_DIR}/${PROJECT}.${MAN_SEC}
 
 # Installing
-INSTALL_BIN_DIR=/usr/local/bin
-INSTALL_MAN_DIR=/usr/local/share/man/man1
-INSTALL_DOC_DIR=/usr/local/share/doc/${PROJECT}
+ifeq ("${PROXIMOTH_INSTALL}","nonlocal")
+INSTALL_PREFIX=/usr
+else
+INSTALL_PREFIX=/usr/local
+endif
+
+INSTALL_BIN_DIR=${INSTALL_PREFIX}/bin
+INSTALL_MAN_DIR=${INSTALL_PREFIX}/share/man/man1
+INSTALL_DOC_DIR=${INSTALL_PREFIX}/share/doc/${PROJECT}
 
 # Compilation
 CC=gcc
@@ -57,7 +63,6 @@ LDFLAGS=-lpcap -lm -pthread
 
 # Version Header
 VERSION_HDR=${BUILD_HDR_DIR}/${PROJECT}/version/version.${HDR_EXT}
-
 
 # Recipies
 ${PROJECT}: ${VERSION_HDR} ${OBJ} ${MAN_PAGE}
@@ -95,16 +100,16 @@ clean:
 	@rm -rf ${BUILD_DIR}
 
 install: 
-	@install -D ${BUILD_BIN_DIR}/${PROJECT} --target-directory ${INSTALL_BIN_DIR}
+	@install -D ${BUILD_BIN_DIR}/${PROJECT} --target-directory ${DESTDIR}${INSTALL_BIN_DIR}
 ifneq (${PROXIMOTH_DOCKER},true)
-	@install -D ${BUILD_MAN_DIR}/${PROJECT}.${MAN_SEC}.gz --target-directory ${INSTALL_MAN_DIR}
-	@install -D ${IMG_DIR}/* --target-directory ${INSTALL_DOC_DIR}/${IMG_DIR}
-	@install -D LICENSE --target-directory ${INSTALL_DOC_DIR}
+	@install -D ${BUILD_MAN_DIR}/${PROJECT}.${MAN_SEC}.gz --target-directory ${DESTDIR}${INSTALL_MAN_DIR}
+	@install -D ${IMG_DIR}/* --target-directory ${DESTDIR}${INSTALL_DOC_DIR}/${IMG_DIR}
+	@install -D LICENSE --target-directory ${DESTDIR}${INSTALL_DOC_DIR}
 endif
 
 uninstall:
-	@rm -f ${INSTALL_BIN_DIR}/${PROJECT}
+	@rm -f ${DESTDIR}${INSTALL_BIN_DIR}/${PROJECT}
 ifneq (${PROXIMOTH_DOCKER},true)
-	@rm -f ${INSTALL_MAN_DIR}/${PROJECT}.${MAN_SEC}.gz
-	@rm -rf ${INSTALL_DOC_DIR}
+	@rm -f ${DESTDIR}${INSTALL_MAN_DIR}/${PROJECT}.${MAN_SEC}.gz
+	@rm -rf ${DESTDIR}${INSTALL_DOC_DIR}
 endif
