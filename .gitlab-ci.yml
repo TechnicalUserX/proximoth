@@ -20,7 +20,6 @@ GTest AMD64:
         - src/**/*
         - include/**/*
         - tests/**/*
-        - makefile
     - if: $CI_PIPELINE_SOURCE == "schedule"
   before_script:
     - apt update -y
@@ -42,7 +41,6 @@ GTest ARM32v7:
         - src/**/*
         - include/**/*
         - tests/**/*
-        - makefile
     - if: $CI_PIPELINE_SOURCE == "schedule"
   before_script:
     - apt update -y
@@ -64,7 +62,6 @@ GTest ARM64v8:
         - src/**/*
         - include/**/*
         - tests/**/*
-        - makefile
     - if: $CI_PIPELINE_SOURCE == "schedule"
   before_script:
     - apt update -y

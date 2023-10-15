@@ -1,3 +1,6 @@
+# 1.0.0-beta.26
+ - CI/CD fix.
+
 # 1.0.0-beta.25
  - Amendments to CI/CD
  - Fixed unnecessary exclusion `manpages` in `.dockerignore`.
