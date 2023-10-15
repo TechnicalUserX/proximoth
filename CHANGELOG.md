@@ -1,3 +1,7 @@
+# 1.0.0-beta.25
+ - Amendments to CI/CD
+ - Fixed unnecessary exclusion `manpages` in `.dockerignore`.
+
 # 1.0.0-beta.24
  - Added website CI/CD.
  - Changed the manpage location to `docs`.
