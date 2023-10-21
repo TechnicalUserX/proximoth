@@ -1,9 +1,7 @@
 ![](/images/proximoth_banner.png)
 # Proximoth
 ### Control Frame Attack Vulnerability Detection Tool
-Proximoth performs `Control Frame Attack` to detect the proximal privacy violation vulnerability.
-
-Control Frame Attack lets the attacker find out whether the target device is in range, in other words, presence detection.
+Proximoth performs `Control Frame Attack`, which lets the attacker find out whether the target device is in range, in other words: presence detection.
 
 # More Info About Control Frame Attack:
 * https://www.researchgate.net/publication/314361145_A_Study_of_MAC_Address_Randomization_in_Mobile_Devices_and_When_it_Fails
