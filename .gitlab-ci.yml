@@ -13,7 +13,9 @@ stages:
 
 GTest AMD64:
   stage: Test
-  image: amd64/$TEST_IMAGE
+  image: 
+    name: amd64/$TEST_IMAGE
+    platform: linux/amd64
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
       changes:
@@ -34,7 +36,9 @@ GTest AMD64:
 
 GTest ARM32v7:
   stage: Test
-  image: arm32v7/$TEST_IMAGE
+  image: 
+    name: arm32v7/$TEST_IMAGE
+    platform: linux/arm/v7
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
       changes:
@@ -55,7 +59,9 @@ GTest ARM32v7:
 
 GTest ARM64v8:
   stage: Test
-  image: arm64v8/$TEST_IMAGE
+  image: 
+    name: arm64v8/$TEST_IMAGE
+    platform: linux/arm64/v8
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
       changes:
@@ -76,7 +82,9 @@ GTest ARM64v8:
 
 Compile AMD64:
   stage: Test
-  image: amd64/$TEST_IMAGE
+  image: 
+    name: amd64/$TEST_IMAGE
+    platform: linux/amd64
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
       changes:
@@ -98,7 +106,9 @@ Compile AMD64:
 
 Compile ARM32v7:
   stage: Test
-  image: arm32v7/$TEST_IMAGE
+  image: 
+    name: arm32v7/$TEST_IMAGE
+    platform: linux/arm/v7
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
       changes:
@@ -120,7 +130,9 @@ Compile ARM32v7:
 
 Compile ARM64v8:
   stage: Test
-  image: arm32v7/$TEST_IMAGE
+  image: 
+    name: arm64v8/$TEST_IMAGE
+    platform: linux/arm64/v8
   rules:
     - if: $CI_COMMIT_BRANCH != null && $CI_COMMIT_TAG == null && $CI_PIPELINE_SOURCE == "push"
       changes:
